@@ -10,6 +10,88 @@
 
 <Accordion prefHeight="529.0" prefWidth="861.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Controller">
   <expandedPane>
+    <TitledPane fx:id="x2" animated="false" text="Read/Update Players and Teams">
+      <content>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <children>
+            <Label layoutX="88.0" layoutY="28.0" text="Players" />
+            <Label layoutX="14.0" layoutY="75.0" prefWidth="127.0" text="Choose a player" />
+            <ComboBox id="combobox" fx:id="comboboxReadUpdate" layoutX="143.0" layoutY="75.0" prefWidth="153.0" promptText="Player List">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <Label layoutX="99.0" layoutY="137.0" text="The Player Info" />
+            <GridPane gridLinesVisible="true" layoutX="14.0" layoutY="203.0" prefHeight="125.0" prefWidth="294.0">
+              <children>
+                <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label text="Date of birth" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Email" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label text="Rank" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField id="emailName" fx:id="readName" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="readbirth" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField id="emailName" fx:id="readEmail" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="readRank" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="113.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="443.0" minWidth="10.0" prefWidth="181.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Label layoutX="462.0" layoutY="75.0" text="Select team" />
+            <Label layoutX="632.0" layoutY="18.0" text="Teams:" />
+            <ComboBox layoutX="552.0" layoutY="73.0" prefWidth="161.0" promptText="Team List">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <GridPane gridLinesVisible="true" layoutX="381.0" layoutY="204.0" prefHeight="121.0" prefWidth="445.0">
+              <children>
+                <Label text="Player Nr1." GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label text="Player Nr2." GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Team name:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="149.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="451.0" minWidth="10.0" prefWidth="296.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Button layoutX="253.0" layoutY="362.0" mnemonicParsing="false" onAction="#updatePlayerAction" text="Save" />
+            <Button layoutX="769.0" layoutY="364.0" mnemonicParsing="false" text="Save" />
+            <Label layoutX="604.0" layoutY="133.0" text="Team info" />
+            <Button layoutX="372.0" layoutY="364.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="deleteButton" layoutX="9.0" layoutY="364.0" mnemonicParsing="false" onAction="#deleteAction" text="Delete" />
+            <TextField fx:id="idInput" layoutX="88.0" layoutY="362.0" prefWidth="57.0" promptText="id" />
+            <Button layoutX="308.0" layoutY="75.0" mnemonicParsing="false" onAction="#loadActionUpdate" prefWidth="85.0" text="Refresh" />
+            <Button layoutX="149.0" layoutY="363.0" mnemonicParsing="false" onAction="#readAction" text="load" />
+          </children>
+        </AnchorPane>
+      </content>
+    </TitledPane>
+  </expandedPane>
+  <panes>
     <TitledPane fx:id="x5" animated="false" text="Create Players and Teams">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -95,9 +177,6 @@
         </AnchorPane>
       </content>
     </TitledPane>
-  </expandedPane>
-  <panes>
-    <fx:reference source="x5" />
     <TitledPane animated="false" text="Start Tournament">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -208,86 +287,7 @@
         </AnchorPane>
       </content>
     </TitledPane>
-    <TitledPane fx:id="x2" animated="false" text="Read/Update Players and Teams">
-      <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-          <children>
-            <Label layoutX="88.0" layoutY="28.0" text="Players" />
-            <Label layoutX="14.0" layoutY="75.0" prefWidth="127.0" text="Choose a player" />
-            <ComboBox id="combobox" fx:id="comboboxReadUpdate" layoutX="143.0" layoutY="75.0" prefWidth="153.0" promptText="Player List">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-            <Label layoutX="99.0" layoutY="137.0" text="The Player Info" />
-            <GridPane gridLinesVisible="true" layoutX="14.0" layoutY="203.0" prefHeight="125.0" prefWidth="294.0">
-              <children>
-                <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label text="Date of birth" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Label text="Email" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <Label text="Rank" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <TextField id="emailName" fx:id="readName" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <TextField fx:id="readbirth" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField id="emailName" fx:id="readEmail" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="readRank" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-              </children>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="113.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="443.0" minWidth="10.0" prefWidth="181.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-            <Label layoutX="462.0" layoutY="75.0" text="Select team" />
-            <Label layoutX="632.0" layoutY="18.0" text="Teams:" />
-            <ComboBox layoutX="552.0" layoutY="73.0" prefWidth="161.0" promptText="Team List">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-            <GridPane gridLinesVisible="true" layoutX="381.0" layoutY="204.0" prefHeight="121.0" prefWidth="445.0">
-              <children>
-                <Label text="Player Nr1." GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label text="Player Nr2." GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Label text="Team name:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-              </children>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="149.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="451.0" minWidth="10.0" prefWidth="296.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-            <Button layoutX="253.0" layoutY="362.0" mnemonicParsing="false" text="Save" />
-            <Button layoutX="769.0" layoutY="364.0" mnemonicParsing="false" text="Save" />
-            <Label layoutX="604.0" layoutY="133.0" text="Team info" />
-            <Button layoutX="372.0" layoutY="364.0" mnemonicParsing="false" text="Delete" />
-            <Button fx:id="deleteButton" layoutX="9.0" layoutY="364.0" mnemonicParsing="false" onAction="#deleteAction" text="Delete" />
-            <TextField fx:id="idInput" layoutX="88.0" layoutY="362.0" prefWidth="57.0" promptText="id" />
-            <Button layoutX="308.0" layoutY="75.0" mnemonicParsing="false" onAction="#loadActionUpdate" prefWidth="85.0" text="Refresh" />
-            <Button layoutX="149.0" layoutY="363.0" mnemonicParsing="false" onAction="#readAction" text="load" />
-          </children>
-        </AnchorPane>
-      </content>
-    </TitledPane>
+    <fx:reference source="x2" />
     <TitledPane fx:id="x3" animated="false" text="Tournament">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">

@@ -76,10 +76,7 @@ public class Controller { //implements Initializable {
 
             while (rs.next()) {
                 members.add(
-
-
                     rs.getString(2));
-
             }
             con.close();
 
@@ -186,7 +183,12 @@ public class Controller { //implements Initializable {
             e.printStackTrace();
         }
     }
-    //create team IN finished.
+    //update player info IN PROGRESS
+    @FXML
+    public void updatePlayerAction(ActionEvent actionEvent){
+        //cia koda rasyk
+    }
+    //create team finished.
     @FXML
     public void createTeamAction(ActionEvent actionEvent){
 
