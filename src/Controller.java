@@ -29,6 +29,16 @@ public class Controller { //implements Initializable {
     private ComboBox<String> createPlayerTwo ;
 
     @FXML
+    private TextField createTeamName;
+
+    @FXML
+    private String[]  THEultiamteSUPERnameMAN = new String[50];
+
+    @FXML
+    private String  RATATATATATATATATATATATATATA ;
+
+
+    @FXML
     private Label label;
     @FXML
     private TextField nameInput, birthInput, emailInput, idInput, readOutput;//create
@@ -59,8 +69,48 @@ public class Controller { //implements Initializable {
        // combobox.setItems(list);// updates list
 
     }
+    //create load action NOT FUCKING WORKING
     @FXML
-    public void loadAction(ActionEvent event) {
+    public void loadActionCreate(ActionEvent event) {// this method is USED FOR CREATING A TEAM OUT OF 2 PLAYERS
+
+        List<String> members = new ArrayList<String>();
+
+        try {
+            Connection con = DBConnection.getConnection(); //load players to comboBox
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Players");
+
+            while (rs.next()) {
+                int incrament = 0;
+                members.add(
+
+                        // rs.getInt(1) +"ID# "
+                        THEultiamteSUPERnameMAN[incrament] =  rs.getString(2)); // dar + truksta
+                        incrament ++;
+
+            }
+            con.close();
+
+            ObservableList<String> list = FXCollections.observableArrayList();
+
+            String listString = "";
+
+            for (String s : members) {
+                listString += list.add(s);
+            }
+            //comboboxReadUpdate.setItems(list);
+            createPlayerOne.setItems(list);
+            createPlayerTwo.setItems(list);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //update load action
+    @FXML
+    public void loadActionUpdate(ActionEvent event) {
 
         List<String> members = new ArrayList<String>();
 
@@ -71,8 +121,9 @@ public class Controller { //implements Initializable {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Players");
             while (rs.next()) {
                 members.add(
-                        rs.getInt(1) +" "
-                                + rs.getString(2));
+                        rs.getInt(1) +"ID# "
+                              +   rs.getString(2));
+
 
             }
             con.close();
@@ -85,6 +136,8 @@ public class Controller { //implements Initializable {
                 listString += list.add(s);
             }
             comboboxReadUpdate.setItems(list);
+            //createPlayerOne.setItems(list);
+            //createPlayerTwo.setItems(list);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -141,6 +194,32 @@ public class Controller { //implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    //create team IN PROGRESS
+    @FXML
+    public void createTeamAction(ActionEvent actionEvent){
+
+        String teamname = createTeamName.getText() ;
+        String player1Name =THEultiamteSUPERnameMAN[0];//member1
+        String player2Name =THEultiamteSUPERnameMAN[1];//member2
+
+        System.out.println("Name ->" + teamname + "<-");
+
+
+        try {
+            String sql = "INSERT INTO Teams VALUES " +
+                    "(NULL, " +"'"+ player1Name +"'"+ ", " + "'"     + player2Name+  "' "  +  " ," +   "'"     +teamname+  "'     "+"," +" "+ 0 + ");";
+
+            System.out.println(sql);
+
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(sql);
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
     //create player DONE
     @FXML

@@ -78,7 +78,7 @@
             <GridPane layoutX="396.0" layoutY="203.0" prefWidth="276.0">
               <children>
                 <Label prefHeight="22.0" prefWidth="117.0" text="Your team name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <TextField prefWidth="169.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="createTeamName" prefWidth="169.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="113.0" />
@@ -88,9 +88,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Button layoutX="615.0" layoutY="239.0" mnemonicParsing="false" text="Save" />
+            <Button layoutX="615.0" layoutY="240.0" mnemonicParsing="false" onAction="#createTeamAction" text="Save" />
             <Label font="$x1" layoutX="329.0" layoutY="5.0" prefWidth="154.0" text="Team info" />
-            <Button layoutX="693.0" layoutY="79.0" mnemonicParsing="false" onAction="#loadAction" prefWidth="85.0" text="Refresh" />
+            <Button layoutX="693.0" layoutY="79.0" mnemonicParsing="false" onAction="#loadActionCreate" prefWidth="85.0" text="Refresh" />
           </children>
         </AnchorPane>
       </content>
@@ -282,7 +282,7 @@
             <Button layoutX="372.0" layoutY="364.0" mnemonicParsing="false" text="Delete" />
             <Button fx:id="deleteButton" layoutX="9.0" layoutY="364.0" mnemonicParsing="false" onAction="#deleteAction" text="Delete" />
             <TextField fx:id="idInput" layoutX="88.0" layoutY="362.0" prefWidth="57.0" promptText="id" />
-            <Button layoutX="308.0" layoutY="75.0" mnemonicParsing="false" onAction="#loadAction" prefWidth="85.0" text="Refresh" />
+            <Button layoutX="308.0" layoutY="75.0" mnemonicParsing="false" onAction="#loadActionUpdate" prefWidth="85.0" text="Refresh" />
             <Button layoutX="149.0" layoutY="363.0" mnemonicParsing="false" onAction="#readAction" text="load" />
           </children>
         </AnchorPane>
