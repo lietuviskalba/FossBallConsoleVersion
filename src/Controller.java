@@ -21,12 +21,15 @@ import java.util.*;
 
 public class Controller { //implements Initializable {
 
+    //All of these are assigned for combo boxes
     @FXML
-    private ComboBox<String> comboboxReadUpdate ;
+    private ComboBox<String> comboboxReadUpdatePlayer ;
     @FXML
     private ComboBox<String> createPlayerOne ;
     @FXML
     private ComboBox<String> createPlayerTwo ;
+    @FXML
+    private ComboBox<String> TeamList ;
 
     @FXML
     private TextField createTeamName;
@@ -34,15 +37,23 @@ public class Controller { //implements Initializable {
     @FXML
     private Label label;
     @FXML
-    private TextField nameInput, birthInput, emailInput, idInput, readOutput;//create
+    private TextField nameInput, birthInput, emailInput, idInput, idTeamInput;//create
     @FXML
-    private TextField readName;//read
+    private TextField readName;//read for players
     @FXML
-    private TextField readbirth;//read
+    private TextField readbirth;//read for players
     @FXML
-    private TextField readEmail;//read
+    private TextField readEmail;//read for players
     @FXML
-    private TextField readRank;//read
+    private TextField readRank;//read for players
+
+    @FXML
+    private TextField readPlayerONE;//read for teams
+    @FXML
+    private TextField readPlayerTWO;//read for teams
+    @FXML
+    private TextField readTeamName;//read for teams
+
     @FXML
     private Button saveButton;
     @FXML
@@ -96,6 +107,38 @@ public class Controller { //implements Initializable {
         }
     }
 
+    //update load action for teams DONE
+    @FXML
+    public void loadActionUpdateForTeams(ActionEvent event) {
+
+        List<String> members = new ArrayList<String>();
+
+        try {
+            Connection con = DBConnection.getConnection(); //load players to comboBox
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Teams");
+            while (rs.next()) {
+                members.add(
+                        rs.getInt(1) +" "
+                                +   rs.getString(4));
+            }
+            con.close();
+
+            ObservableList<String> list = FXCollections.observableArrayList();
+
+            String listString = "";
+
+            for (String s : members) {
+                listString += list.add(s);
+            }
+            TeamList.setItems(list);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //update load action
     @FXML
     public void loadActionUpdate(ActionEvent event) {
@@ -111,8 +154,6 @@ public class Controller { //implements Initializable {
                 members.add(
                         rs.getInt(1) +"ID# "
                               +   rs.getString(2));
-
-
             }
             con.close();
 
@@ -123,7 +164,7 @@ public class Controller { //implements Initializable {
             for (String s : members) {
                 listString += list.add(s);
             }
-            comboboxReadUpdate.setItems(list);
+            comboboxReadUpdatePlayer.setItems(list);
             //createPlayerOne.setItems(list);
             //createPlayerTwo.setItems(list);
 
@@ -131,15 +172,35 @@ public class Controller { //implements Initializable {
             e.printStackTrace();
         }
     }
+    //read all the team infomation IN PROGRESS
+    @FXML
+    public void readTeamAction(ActionEvent event){
 
+        String readID = idTeamInput.getText();
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Teams WHERE TeamID = " + readID);
+            while (rs.next()) {
+
+                readPlayerONE.setText(rs.getString(2));
+                readPlayerTWO.setText(rs.getString(3));
+                readTeamName.setText(rs.getString(4));
+            }
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // read all the player inforamtion
     @FXML
     public void readAction(ActionEvent event){
 
         String readID = idInput.getText();
-        String fieldName = "" ;
-        String fieldBirth ="";
-        String fieldEmail;
-        String fieldRank;
 
         try {
 
@@ -149,7 +210,6 @@ public class Controller { //implements Initializable {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Players WHERE ID = " + readID);
             while (rs.next()) {
 
-                //System.out.println(rs.getString(1));
                 readName.setText(rs.getString(2));
                 readbirth.setText(rs.getString(3));
                 readEmail.setText(rs.getString(4));

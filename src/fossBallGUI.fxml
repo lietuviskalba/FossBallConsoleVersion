@@ -16,7 +16,7 @@
           <children>
             <Label layoutX="88.0" layoutY="28.0" text="Players" />
             <Label layoutX="14.0" layoutY="75.0" prefWidth="127.0" text="Choose a player" />
-            <ComboBox id="combobox" fx:id="comboboxReadUpdate" layoutX="143.0" layoutY="75.0" prefWidth="153.0" promptText="Player List">
+            <ComboBox id="combobox" fx:id="comboboxReadUpdatePlayer" layoutX="143.0" layoutY="75.0" prefWidth="153.0" promptText="Player List">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -50,7 +50,7 @@
             </GridPane>
             <Label layoutX="462.0" layoutY="75.0" text="Select team" />
             <Label layoutX="632.0" layoutY="18.0" text="Teams:" />
-            <ComboBox layoutX="552.0" layoutY="73.0" prefWidth="161.0" promptText="Team List">
+            <ComboBox fx:id="TeamList" layoutX="552.0" layoutY="73.0" prefWidth="161.0" promptText="Team List">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -64,9 +64,9 @@
                 <Label text="Player Nr1." GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label text="Player Nr2." GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <Label text="Team name:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="readPlayerONE" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="readPlayerTWO" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="readTeamName" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="149.0" />
@@ -85,7 +85,10 @@
             <Button fx:id="deleteButton" layoutX="9.0" layoutY="364.0" mnemonicParsing="false" onAction="#deleteAction" text="Delete" />
             <TextField fx:id="idInput" layoutX="88.0" layoutY="362.0" prefWidth="57.0" promptText="id" />
             <Button layoutX="308.0" layoutY="75.0" mnemonicParsing="false" onAction="#loadActionUpdate" prefWidth="85.0" text="Refresh" />
-            <Button layoutX="149.0" layoutY="363.0" mnemonicParsing="false" onAction="#readAction" text="load" />
+            <Button layoutX="149.0" layoutY="362.0" mnemonicParsing="false" onAction="#readAction" text="load" />
+            <Button layoutX="741.0" layoutY="75.0" mnemonicParsing="false" onAction="#loadActionUpdateForTeams" prefWidth="85.0" text="Refresh" />
+            <TextField id="idInput" fx:id="idTeamInput" layoutX="539.0" layoutY="365.0" prefWidth="57.0" promptText="id" />
+            <Button layoutX="604.0" layoutY="365.0" mnemonicParsing="false" onAction="#readTeamAction" text="load" />
           </children>
         </AnchorPane>
       </content>
