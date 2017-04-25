@@ -124,7 +124,7 @@ public class Controller { //implements Initializable {
         String deleteID = idInput.getText();
 
         try {
-            String sql = "DELETE FROM `Players` WHERE `Players`.`ID` + " + deleteID+ ";";
+            String sql = "DELETE FROM `Players` WHERE `ID` = " + deleteID+ ";";
 
             System.out.println(sql);
 
