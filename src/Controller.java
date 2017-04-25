@@ -33,11 +33,8 @@ public class Controller { //implements Initializable {
 
     @FXML
     private TextField createTeamName;
-
     @FXML
-    private Label label;
-    @FXML
-    private TextField nameInput, birthInput, emailInput, idInput, idTeamInput;//create
+    private TextField nameInput, birthInput, emailInput, idInput, idTeamInput;//create for players
     @FXML
     private TextField readName;//read for players
     @FXML
@@ -56,8 +53,6 @@ public class Controller { //implements Initializable {
 
     @FXML
     private Button saveButton;
-    @FXML
-    private Button deleteButton;
 
     @FXML
     private void saveButtonAction(ActionEvent event) {
@@ -67,15 +62,9 @@ public class Controller { //implements Initializable {
             saveButton.setText("Save");
         }
     }
+    //LOAD action for Team players //Create
     @FXML
-    private void buttonAction(ActionEvent event) {
-        //label.setText("Selected + " + combobox.getValue());
-       // combobox.setItems(list);// updates list
-
-    }
-    //create load action NOT FUCKING WORKING
-    @FXML
-    public void loadActionCreate(ActionEvent event) {// this method is USED FOR CREATING A TEAM OUT OF 2 PLAYERS
+    public void loadActionTeamPlayers(ActionEvent event) {// this method is USED FOR CREATING A TEAM OUT OF 2 PLAYERS
 
         List<String> members = new ArrayList<String>();
 
@@ -98,7 +87,6 @@ public class Controller { //implements Initializable {
             for (String s : members) {
                 listString += list.add(s);
             }
-            //comboboxReadUpdate.setItems(list);
             createPlayerOne.setItems(list);
             createPlayerTwo.setItems(list);
 
@@ -107,7 +95,7 @@ public class Controller { //implements Initializable {
         }
     }
 
-    //update load action for teams DONE
+    //LOAD action for Teams //Update&Read
     @FXML
     public void loadActionUpdateForTeams(ActionEvent event) {
 
@@ -139,9 +127,9 @@ public class Controller { //implements Initializable {
         }
     }
 
-    //update load action
+    //Load action for Players //Update&Read
     @FXML
-    public void loadActionUpdate(ActionEvent event) {
+    public void loadActionUpdateForPlayers(ActionEvent event) {
 
         List<String> members = new ArrayList<String>();
 
@@ -152,7 +140,7 @@ public class Controller { //implements Initializable {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Players");
             while (rs.next()) {
                 members.add(
-                        rs.getInt(1) +"ID# "
+                        rs.getInt(1) +" "
                               +   rs.getString(2));
             }
             con.close();
@@ -165,16 +153,13 @@ public class Controller { //implements Initializable {
                 listString += list.add(s);
             }
             comboboxReadUpdatePlayer.setItems(list);
-            //createPlayerOne.setItems(list);
-            //createPlayerTwo.setItems(list);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    //read all the team infomation IN PROGRESS
+    //READ action for Team information //Update&Read
     @FXML
-    public void readTeamAction(ActionEvent event){
+    public void readActionForTeams(ActionEvent event){
 
         String readID = idTeamInput.getText();
 
@@ -196,14 +181,13 @@ public class Controller { //implements Initializable {
             e.printStackTrace();
         }
     }
-    // read all the player inforamtion
+    //READ action for Player information //Update&Read
     @FXML
-    public void readAction(ActionEvent event){
+    public void readActionForPlayers(ActionEvent event){
 
         String readID = idInput.getText();
 
         try {
-
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
@@ -215,18 +199,15 @@ public class Controller { //implements Initializable {
                 readEmail.setText(rs.getString(4));
                 readRank.setText(rs.getString(5));
             }
-
             con.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
-    //delete method DONE
+    //DELETE action for Players //Update&Read
     @FXML
-    public void deleteAction(ActionEvent actionEvent){
+    public void deleteActionForPlayers(ActionEvent actionEvent){
 
         String deleteID = idInput.getText();
 
@@ -243,15 +224,32 @@ public class Controller { //implements Initializable {
             e.printStackTrace();
         }
     }
-    //update player info IN PROGRESS
+    //DELETE action for Teams //Update&Read
     @FXML
-    public void updatePlayerAction(ActionEvent actionEvent){
-        //cia koda rasyk
+    public void deleteActionForTeams(ActionEvent actionEvent){
+
+        String deleteID = idTeamInput.getText();
+
+        try {
+            String sql = "DELETE FROM `Teams` WHERE `TeamID` = " + deleteID+ ";";
+
+            System.out.println(sql);
+
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(sql);
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //UPDATE action for players //Update&Read
+    @FXML
+    public void updateActionForPlayers(ActionEvent actionEvent){
       String id = idInput.getText();
       String name =  readName.getText();
       String birth = readbirth.getText();
       String email = readEmail.getText();
-       String rank = readRank.getText();
 
         try {
             String sql =  "UPDATE Players SET name = "+ "'" +name+"'" + ", birth = + " + "'"+ birth + "',"+ "email ="  + " '" + email+"'" + "WHERE Players. ID =" + id;
@@ -265,11 +263,34 @@ public class Controller { //implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-    //create team finished.
+    //UPDATE action for Teams //Update&Read
     @FXML
-    public void createTeamAction(ActionEvent actionEvent){
+    public void updateActionForTeams(ActionEvent actionEvent){
+        String idTeam = idTeamInput.getText();
+        String player1 = readPlayerONE.getText();
+        String player2 = readPlayerTWO.getText();
+        String teamName = readTeamName.getText();
+
+        try {
+            String sql =  "UPDATE Teams SET Member1 = "+ "'" +player1+"'" + ", Member2 =  +" + "'"+ player2 + "',"+ "TeamName ="  + " '" + teamName+"'" + "WHERE Teams. TeamID =" + idTeam;
+
+            System.out.println(sql);
+
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(sql);
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    //CREATE action for Team //Create
+    @FXML
+    public void createActionForTeams(ActionEvent actionEvent){
 
         String teamname = createTeamName.getText() ;
         String player1Name =createPlayerOne.getValue(); //member1
@@ -293,9 +314,9 @@ public class Controller { //implements Initializable {
         }
 
     }
-    //create player DONE
+    //CREATE action for Players //Create
     @FXML
-    public void createAction(ActionEvent actionEvent) {
+    public void createActionForPlayers(ActionEvent actionEvent) {
 
         String name = nameInput.getText();
         String birth = birthInput.getText();
