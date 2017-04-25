@@ -22,7 +22,12 @@ import java.util.*;
 public class Controller { //implements Initializable {
 
     @FXML
-    private ComboBox<String> combobox;
+    private ComboBox<String> comboboxReadUpdate ;
+    @FXML
+    private ComboBox<String> createPlayerOne ;
+    @FXML
+    private ComboBox<String> createPlayerTwo ;
+
     @FXML
     private Label label;
     @FXML
@@ -79,7 +84,7 @@ public class Controller { //implements Initializable {
             for (String s : members) {
                 listString += list.add(s);
             }
-            combobox.setItems(list);
+            comboboxReadUpdate.setItems(list);
 
         } catch (SQLException e) {
             e.printStackTrace();
