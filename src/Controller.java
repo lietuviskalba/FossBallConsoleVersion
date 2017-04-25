@@ -82,12 +82,10 @@ public class Controller { //implements Initializable {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Players");
 
             while (rs.next()) {
-                int incrament = 0;
                 members.add(
 
-                        // rs.getInt(1) +"ID# "
-                        THEultiamteSUPERnameMAN[incrament] =  rs.getString(2)); // dar + truksta
-                        incrament ++;
+
+                    rs.getString(2));
 
             }
             con.close();
@@ -200,8 +198,8 @@ public class Controller { //implements Initializable {
     public void createTeamAction(ActionEvent actionEvent){
 
         String teamname = createTeamName.getText() ;
-        String player1Name =THEultiamteSUPERnameMAN[0];//member1
-        String player2Name =THEultiamteSUPERnameMAN[1];//member2
+        String player1Name =createPlayerOne.getValue(); //member1
+        String player2Name =createPlayerTwo.getValue(); //member2
 
         System.out.println("Name ->" + teamname + "<-");
 
