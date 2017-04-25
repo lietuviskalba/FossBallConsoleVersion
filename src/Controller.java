@@ -193,7 +193,7 @@ public class Controller { //implements Initializable {
             e.printStackTrace();
         }
     }
-    //create team IN PROGRESS
+    //create team IN finished
     @FXML
     public void createTeamAction(ActionEvent actionEvent){
 
