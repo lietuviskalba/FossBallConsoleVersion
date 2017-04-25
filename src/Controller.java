@@ -32,13 +32,6 @@ public class Controller { //implements Initializable {
     private TextField createTeamName;
 
     @FXML
-    private String[]  THEultiamteSUPERnameMAN = new String[50];
-
-    @FXML
-    private String  RATATATATATATATATATATATATATA ;
-
-
-    @FXML
     private Label label;
     @FXML
     private TextField nameInput, birthInput, emailInput, idInput, readOutput;//create
