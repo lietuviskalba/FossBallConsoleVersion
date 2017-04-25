@@ -100,17 +100,18 @@ public class Controller { //implements Initializable {
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Players");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Players WHERE ID = " + readID);
             while (rs.next()) {
 
-                //rs.getString(1) = fieldName;
-               // rs.getString(2) = fieldBirth;
-
-
-
+                //System.out.println(rs.getString(1));
+                readName.setText(rs.getString(2));
+                readbirth.setText(rs.getString(3));
+                readEmail.setText(rs.getString(4));
+                readRank.setText(rs.getString(5));
             }
 
             con.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
