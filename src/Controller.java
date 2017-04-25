@@ -26,7 +26,15 @@ public class Controller { //implements Initializable {
     @FXML
     private Label label;
     @FXML
-    private TextField nameInput, birthInput, emailInput, idInput, readOutput;
+    private TextField nameInput, birthInput, emailInput, idInput, readOutput;//create
+    @FXML
+    private TextField readName;//read
+    @FXML
+    private TextField readbirth;//read
+    @FXML
+    private TextField readEmail;//read
+    @FXML
+    private TextField readRank;//read
     @FXML
     private Button saveButton;
     @FXML
@@ -81,18 +89,27 @@ public class Controller { //implements Initializable {
     @FXML
     public void readAction(ActionEvent event){
 
-        String readText = readOutput.getText();
+        String readID = idInput.getText();
+        String fieldName = "" ;
+        String fieldBirth ="";
+        String fieldEmail;
+        String fieldRank;
+
         try {
+
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM players");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Players");
             while (rs.next()) {
-                System.out.println(
-                        rs.getInt(1) + "  "
-                                + rs.getString(2) + "  "
-                                + rs.getString(3));
+
+                //rs.getString(1) = fieldName;
+               // rs.getString(2) = fieldBirth;
+
+
+
             }
+
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
