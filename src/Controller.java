@@ -187,6 +187,25 @@ public class Controller { //implements Initializable {
     @FXML
     public void updatePlayerAction(ActionEvent actionEvent){
         //cia koda rasyk
+      String id = idInput.getText();
+      String name =  readName.getText();
+      String birth = readbirth.getText();
+      String email = readEmail.getText();
+       String rank = readRank.getText();
+
+        try {
+            String sql =  "UPDATE Players SET name = "+ "'" +name+"'" + ", birth = + " + "'"+ birth + "',"+ "email ="  + " '" + email+"'" + "WHERE Players. ID =" + id;
+
+            System.out.println(sql);
+
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(sql);
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
     //create team finished.
     @FXML
