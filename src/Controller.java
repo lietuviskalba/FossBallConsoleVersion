@@ -23,13 +23,17 @@ public class Controller { //implements Initializable {
 
     //All of these are assigned for combo boxes
     @FXML
-    private ComboBox<String> comboboxReadUpdatePlayer ;
+    private ComboBox<String> PlayerListInUpdateAndRead;
     @FXML
-    private ComboBox<String> createPlayerOne ;
+    private ComboBox<String> TeamListInUpdateAndRead;
     @FXML
-    private ComboBox<String> createPlayerTwo ;
+    private ComboBox<String> chooseForTeamPlayerONE ;//when create teams
     @FXML
-    private ComboBox<String> TeamList ;
+    private ComboBox<String> chooseForTeamPlayerTWO ;
+    @FXML
+    private ComboBox<String> chooseToUpdateTeamPlayesONE;//when updating teams
+    @FXML
+    private ComboBox<String> chooseToUpdateTeamPlayesTWO;
     //Tournament comboBoxes for all the teams and rounds
     @FXML
     private ComboBox<String> Team1R1;//Round 1
@@ -118,8 +122,8 @@ public class Controller { //implements Initializable {
             for (String s : members) {
                 listString += list.add(s);
             }
-            createPlayerOne.setItems(list);
-            createPlayerTwo.setItems(list);
+            chooseForTeamPlayerONE.setItems(list);
+            chooseForTeamPlayerTWO.setItems(list);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,7 +155,7 @@ public class Controller { //implements Initializable {
             for (String s : members) {
                 listString += list.add(s);
             }
-            TeamList.setItems(list);
+            TeamListInUpdateAndRead.setItems(list);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -183,7 +187,10 @@ public class Controller { //implements Initializable {
             for (String s : members) {
                 listString += list.add(s);
             }
-            comboboxReadUpdatePlayer.setItems(list);
+            PlayerListInUpdateAndRead.setItems(list);
+            chooseToUpdateTeamPlayesONE.setItems(list);
+            chooseToUpdateTeamPlayesTWO.setItems(list);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -324,8 +331,8 @@ public class Controller { //implements Initializable {
     public void createActionForTeams(ActionEvent actionEvent){
 
         String teamname = createTeamName.getText() ;
-        String player1Name =createPlayerOne.getValue(); //member1
-        String player2Name =createPlayerTwo.getValue(); //member2
+        String player1Name =chooseForTeamPlayerONE.getValue(); //member1
+        String player2Name =chooseForTeamPlayerTWO.getValue(); //member2
 
         System.out.println("Name ->" + teamname + "<-");
 
