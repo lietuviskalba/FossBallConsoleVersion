@@ -1,16 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<Accordion prefHeight="567.0" prefWidth="861.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Controller">
-  <expandedPane>
-    <TitledPane fx:id="x2" animated="false" text="Read/Update Players and Teams">
+<Accordion prefHeight="567.0" prefWidth="861.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+  <panes>
+    <TitledPane animated="false" prefHeight="511.0" prefWidth="861.0" text="Create Players and Teams" fx:id="x5">
+      <content>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <children>
+            <Label layoutX="20.0" layoutY="55.0" prefWidth="154.0" text="Create Player">
+              <font>
+                <Font size="18.0" fx:id="x1" />
+              </font>
+            </Label>
+            <GridPane gridLinesVisible="true" layoutX="396.0" layoutY="80.0" prefHeight="187.0" prefWidth="354.0">
+              <children>
+                <Label text="Player Nr. 1" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label text="Player Nr. 2" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <ComboBox id="createPlayerTwo" fx:id="chooseForTeamPlayerTWO" prefWidth="230.0" promptText="Choose Player" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <ComboBox id="combo" fx:id="chooseForTeamPlayerONE" prefWidth="230.0" promptText="Choose Player" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <Label prefHeight="22.0" prefWidth="117.0" text="Your team name" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="createTeamName" prefWidth="169.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Button mnemonicParsing="false" onAction="#createActionForTeams" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="119.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="235.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane layoutX="396.0" layoutY="203.0" prefWidth="276.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="113.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="135.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Label font="$x1" layoutX="455.0" layoutY="43.0" prefWidth="154.0" text="Create Team" />
+            <Button layoutX="757.0" layoutY="88.0" mnemonicParsing="false" onAction="#loadActionTeamPlayers" prefWidth="85.0" text="Refresh" />
+            <GridPane gridLinesVisible="true" layoutX="7.0" layoutY="80.0" prefHeight="198.0" prefWidth="328.0">
+              <children>
+                <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="nameInput" prefWidth="200.0" promptText="eg. John" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Year of birth" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="birthInput" prefWidth="200.0" promptText="Year" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Email" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="emailInput" prefWidth="200.0" promptText="example@mail.com" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Button mnemonicParsing="false" onAction="#createActionForPlayers" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.0" minWidth="10.0" prefWidth="92.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="236.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </AnchorPane>
+      </content>
+    </TitledPane>
+    <TitledPane animated="false" text="Read/Update Players and Teams" fx:id="x2">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <children>
@@ -169,92 +257,7 @@
         </AnchorPane>
       </content>
     </TitledPane>
-  </expandedPane>
-  <panes>
-    <TitledPane fx:id="x5" animated="false" prefHeight="511.0" prefWidth="861.0" text="Create Players and Teams">
-      <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-          <children>
-            <Label layoutX="20.0" layoutY="55.0" prefWidth="154.0" text="Create Player">
-              <font>
-                <Font size="18.0" fx:id="x1" />
-              </font>
-            </Label>
-            <GridPane gridLinesVisible="true" layoutX="396.0" layoutY="80.0" prefHeight="187.0" prefWidth="354.0">
-              <children>
-                <Label text="Player Nr. 1" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label text="Player Nr. 2" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <ComboBox id="createPlayerTwo" fx:id="chooseForTeamPlayerTWO" prefWidth="230.0" promptText="Choose Player" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <ComboBox id="combo" fx:id="chooseForTeamPlayerONE" prefWidth="230.0" promptText="Choose Player" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="Item 1" />
-                      <String fx:value="Item 2" />
-                      <String fx:value="Item 3" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <Label prefHeight="22.0" prefWidth="117.0" text="Your team name" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="createTeamName" prefWidth="169.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Button mnemonicParsing="false" onAction="#createActionForTeams" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-              </children>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="119.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="235.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-            <GridPane layoutX="396.0" layoutY="203.0" prefWidth="276.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="113.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="135.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-            <Label font="$x1" layoutX="455.0" layoutY="43.0" prefWidth="154.0" text="Create Team" />
-            <Button layoutX="757.0" layoutY="88.0" mnemonicParsing="false" onAction="#loadActionTeamPlayers" prefWidth="85.0" text="Refresh" />
-            <GridPane gridLinesVisible="true" layoutX="7.0" layoutY="80.0" prefHeight="198.0" prefWidth="328.0">
-              <children>
-                <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <TextField fx:id="nameInput" prefWidth="200.0" promptText="eg. John" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Label text="Year of birth" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <TextField fx:id="birthInput" prefWidth="200.0" promptText="Year" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label text="Email" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="emailInput" prefWidth="200.0" promptText="example@mail.com" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Button mnemonicParsing="false" onAction="#createActionForPlayers" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-              </children>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.0" minWidth="10.0" prefWidth="92.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="236.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-          </children>
-        </AnchorPane>
-      </content>
-    </TitledPane>
-    <fx:reference source="x2" />
-    <TitledPane fx:id="x3" animated="false" prefHeight="524.0" prefWidth="861.0" text="Tournament">
+    <TitledPane animated="false" prefHeight="524.0" prefWidth="861.0" text="Tournament" fx:id="x3">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <children>
@@ -443,6 +446,7 @@
               </rowConstraints>
             </GridPane>
             <Button layoutX="14.0" layoutY="445.0" mnemonicParsing="false" onAction="#loadActionForTeamsTournaments" text="Refresh" />
+                  <Button layoutX="644.0" layoutY="439.0" mnemonicParsing="false" text="Delete" />
           </children>
         </AnchorPane>
       </content>

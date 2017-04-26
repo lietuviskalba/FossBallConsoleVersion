@@ -91,11 +91,29 @@ public class Controller { //implements Initializable {
 
     @FXML
     private void saveButtonAction(ActionEvent event) {
-        if(saveButton.getText().equals("Save")){
-            saveButton.setText("SAVED!!!");
-        }else{
-            saveButton.setText("Save");
+
+
+        //if(saveButton.getText().equals("Save")){
+        //    saveButton.setText("SAVED!!!");
+       // }else{
+        //    saveButton.setText("Save");
+       // }
+
+        String laimetojai = winner.getValue();
+
+        try {
+            String sql =  "UPDATE Teams SET Score = Score+ 1 WHERE Teams.TeamName = '" + laimetojai + "'";
+
+            System.out.println(sql);
+
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(sql);
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
     }
     //LOAD action for Team players //Create
     @FXML
