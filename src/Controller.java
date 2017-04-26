@@ -142,6 +142,9 @@ public class Controller { //implements Initializable {
             }
             chooseForTeamPlayerONE.setItems(list);
             chooseForTeamPlayerTWO.setItems(list);
+            //this in create/read tab
+            chooseToUpdateTeamPlayesONE.setItems(list);
+            chooseToUpdateTeamPlayesTWO.setItems(list);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -206,8 +209,6 @@ public class Controller { //implements Initializable {
                 listString += list.add(s);
             }
             PlayerListInUpdateAndRead.setItems(list);
-            chooseToUpdateTeamPlayesONE.setItems(list);
-            chooseToUpdateTeamPlayesTWO.setItems(list);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -248,6 +249,7 @@ public class Controller { //implements Initializable {
 
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Players WHERE ID = " + readID);
+
             while (rs.next()) {
 
                 readName.setText(rs.getString(2));
@@ -324,12 +326,13 @@ public class Controller { //implements Initializable {
     @FXML
     public void updateActionForTeams(ActionEvent actionEvent){
         String idTeam = idTeamInput.getText();
-        String player1 = readPlayerONE.getText();
-        String player2 = readPlayerTWO.getText();
+        String player1 = chooseToUpdateTeamPlayesONE.getValue();//readPlayerONE.getText();
+        String player2 = chooseToUpdateTeamPlayesTWO.getValue();//readPlayerTWO.getText();
         String teamName = readTeamName.getText();
 
         try {
             String sql =  "UPDATE Teams SET Member1 = "+ "'" +player1+"'" + ", Member2 =  +" + "'"+ player2 + "',"+ "TeamName ="  + " '" + teamName+"'" + "WHERE Teams. TeamID =" + idTeam;
+
 
             System.out.println(sql);
 
@@ -341,9 +344,6 @@ public class Controller { //implements Initializable {
             e.printStackTrace();
         }
     }
-
-
-
     //CREATE action for Team //Create
     @FXML
     public void createActionForTeams(ActionEvent actionEvent){
