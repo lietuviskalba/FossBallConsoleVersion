@@ -98,17 +98,38 @@ public class Controller { //implements Initializable {
        // }else{
         //    saveButton.setText("Save");
        // }
-
+        List<String> winneriai = new ArrayList<String>();
         String laimetojai = winner.getValue();
+
+
 
         try {
             String sql =  "UPDATE Teams SET Score = Score+ 1 WHERE Teams.TeamName = '" + laimetojai + "'";
 
-            System.out.println(sql);
+
+
 
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
+
+            ResultSet rs = stmt.executeQuery("SELECT Member1, Member2 FROM Teams WHERE TeamName ="+ "'"+ laimetojai + "'");
+            while (rs.next()) {
+                winneriai.add(
+                        rs.getString(1));
+                winneriai.add(
+                        rs.getString(2));
+            }
+            String laimetojas1 = winneriai.get(0);// winner 1
+            String laimetojas2 = winneriai.get(1); //winner 2
+            String sql1 =  "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas1 +"'";
+            String sql2 =  "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas2 +"'";
             stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql1);
+            stmt.executeUpdate(sql2);
+            System.out.println(sql);
+            System.out.println(sql1);
+            System.out.println(sql2);
+
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
