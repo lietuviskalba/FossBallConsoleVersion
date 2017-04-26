@@ -30,6 +30,37 @@ public class Controller { //implements Initializable {
     private ComboBox<String> createPlayerTwo ;
     @FXML
     private ComboBox<String> TeamList ;
+    //Tournament comboBoxes for all the teams and rounds
+    @FXML
+    private ComboBox<String> Team1R1;//Round 1
+    @FXML
+    private ComboBox<String> Team2R1;
+    @FXML
+    private ComboBox<String> Team3R1;
+    @FXML
+    private ComboBox<String> Team4R1;
+    @FXML
+    private ComboBox<String> Team5R1;
+    @FXML
+    private ComboBox<String> Team6R1;
+    @FXML
+    private ComboBox<String> Team7R1;
+    @FXML
+    private ComboBox<String> Team8R1;
+    @FXML
+    private ComboBox<String> Team1R2;//Round 2
+    @FXML
+    private ComboBox<String> Team2R2;
+    @FXML
+    private ComboBox<String> Team3R2;
+    @FXML
+    private ComboBox<String> Team4R2;
+    @FXML
+    private ComboBox<String> Team1R3;//Finaly
+    @FXML
+    private ComboBox<String> Team2R3;
+    @FXML
+    private ComboBox<String> winner;//WINNER
 
     @FXML
     private TextField createTeamName;
@@ -338,4 +369,50 @@ public class Controller { //implements Initializable {
             e.printStackTrace();
         }
     }
+    //LOAD action for Teams //Tournament
+    @FXML
+    public void loadActionForTeamsTournaments(ActionEvent actionEvent){
+
+        List<String> members = new ArrayList<String>();
+
+        try {
+            Connection con = DBConnection.getConnection();
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Teams");
+
+            while (rs.next()) {
+                members.add(
+                        rs.getString(4));
+            }
+            con.close();
+
+            ObservableList<String> list = FXCollections.observableArrayList();
+
+            String listString = "";
+
+            for (String s : members) {
+                listString += list.add(s);
+            }
+            Team1R1.setItems(list);
+            Team2R1.setItems(list);
+            Team3R1.setItems(list);
+            Team4R1.setItems(list);
+            Team5R1.setItems(list);
+            Team6R1.setItems(list);
+            Team7R1.setItems(list);
+            Team8R1.setItems(list);
+            Team1R2.setItems(list);
+            Team2R2.setItems(list);
+            Team3R2.setItems(list);
+            Team4R2.setItems(list);
+            Team1R3.setItems(list);
+            Team2R3.setItems(list);
+            winner.setItems(list);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
