@@ -19,15 +19,28 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<Accordion prefHeight="567.0" prefWidth="861.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Controller">
+<Accordion prefHeight="643.0" prefWidth="959.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Controller">
   <panes>
+    <TitledPane animated="false" prefHeight="598.0" prefWidth="885.0" text="Start">
+      <content>
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <children>
+            <Label layoutX="97.0" layoutY="149.0" prefHeight="179.0" prefWidth="685.0" text="Welcome to our Foosball Tournament System" textAlignment="CENTER" textFill="#003d99" underline="true" wrapText="true">
+              <font>
+                <Font size="33.0" />
+              </font>
+            </Label>
+          </children>
+        </AnchorPane>
+      </content>
+    </TitledPane>
     <TitledPane fx:id="x5" animated="false" prefHeight="511.0" prefWidth="861.0" text="Create Players and Teams">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <children>
-            <Label layoutX="20.0" layoutY="55.0" prefWidth="154.0" text="Create Player">
+            <Label layoutX="51.0" layoutY="38.0" prefWidth="154.0" text="Create Player">
               <font>
-                <Font size="18.0" fx:id="x1" />
+                <Font name="System Bold" size="22.0" fx:id="x1" />
               </font>
             </Label>
             <GridPane gridLinesVisible="true" layoutX="396.0" layoutY="80.0" prefHeight="187.0" prefWidth="354.0">
@@ -53,7 +66,7 @@
                   </items>
                 </ComboBox>
                 <Label prefHeight="22.0" prefWidth="117.0" text="Your team name" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="createTeamName" prefWidth="169.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="createTeamName" prefWidth="169.0" promptText="TeamName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Button mnemonicParsing="false" onAction="#createActionForTeams" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="3" />
               </children>
               <columnConstraints>
@@ -107,11 +120,7 @@
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <children>
-            <Label layoutX="167.0" layoutY="22.0" text="Players:">
-              <font>
-                <Font size="22.0" fx:id="x4" />
-              </font>
-            </Label>
+            <Label font="$x1" layoutX="167.0" layoutY="22.0" text="Players:" />
             <Label layoutX="99.0" layoutY="137.0" text="The Player Info" />
             <GridPane gridLinesVisible="true" layoutX="14.0" layoutY="174.0" prefHeight="154.0" prefWidth="354.0">
               <children>
@@ -135,7 +144,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Label font="$x4" layoutX="566.0" layoutY="18.0" text="Teams:" />
+            <Label font="$x1" layoutX="566.0" layoutY="18.0" text="Teams:" />
             <GridPane gridLinesVisible="true" prefHeight="178.0" prefWidth="445.0" AnchorPane.leftAnchor="397.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="174.0">
               <children>
                 <Label text="Player Nr1." GridPane.columnIndex="0" GridPane.rowIndex="0" />
@@ -198,7 +207,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane layoutX="397.0" layoutY="366.0" prefWidth="357.0">
+            <GridPane layoutX="417.0" layoutY="368.0" prefWidth="357.0">
               <children>
                 <Button mnemonicParsing="false" onAction="#deleteActionForTeams" prefWidth="89.0" text="Delete" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <TextField id="idInput" fx:id="idTeamInput" prefWidth="57.0" promptText="id" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -266,12 +275,12 @@
         </AnchorPane>
       </content>
     </TitledPane>
-    <TitledPane fx:id="x3" animated="false" prefHeight="524.0" prefWidth="861.0" text="Tournament">
+    <TitledPane fx:id="x3" animated="false" prefHeight="536.0" prefWidth="882.9999000000025" text="Tournament">
       <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="509.0" prefWidth="933.0">
           <children>
-            <Label font="$x4" layoutX="331.0" layoutY="-22.0" prefHeight="73.0" prefWidth="163.0" text="Tournament" />
-            <GridPane gridLinesVisible="true" layoutX="0.0" layoutY="31.0" prefHeight="385.0" prefWidth="858.0">
+            <Label font="$x1" layoutX="365.0" layoutY="5.0" prefHeight="37.0" prefWidth="149.0" text="Tournament" />
+            <GridPane gridLinesVisible="true" layoutX="1.0" layoutY="54.0" prefHeight="385.0" prefWidth="858.0">
               <children>
                 <Label text="Team 1" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <Label text="Team 2" GridPane.columnIndex="0" GridPane.rowIndex="2" />
@@ -292,7 +301,6 @@
                 <Label text="score 2" GridPane.columnIndex="4" GridPane.rowIndex="0" />
                 <Label text="Round 3" GridPane.columnIndex="5" GridPane.rowIndex="0" />
                 <Label text="score 3" GridPane.columnIndex="6" GridPane.rowIndex="0" />
-                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonAction" text="Save" GridPane.columnIndex="6" GridPane.rowIndex="8" />
                 <ComboBox fx:id="Team1R1" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
@@ -431,7 +439,7 @@
                   </items>
                 </ComboBox>
                 <TextField prefWidth="200.0" promptText="score" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-                <Label text="WINNER" textFill="#14ff00" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                <Label text="WINNER" textAlignment="LEFT" textFill="#00993d" GridPane.columnIndex="6" GridPane.rowIndex="3" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -454,8 +462,25 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Button layoutX="14.0" layoutY="445.0" mnemonicParsing="false" onAction="#loadActionForTeamsTournaments" text="Refresh" />
-            <Button layoutX="644.0" layoutY="439.0" mnemonicParsing="false" text="Delete" />
+            <GridPane layoutX="439.0" layoutY="463.0" prefWidth="421.0">
+              <children>
+                <Button mnemonicParsing="false" prefWidth="100.0" text="Delete" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Button mnemonicParsing="false" onAction="#loadActionForTeamsTournaments" prefWidth="100.0" text="Refresh" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonAction" prefWidth="91.0" text="Save" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                <Button mnemonicParsing="false" prefWidth="91.0" text="Load" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                <TextField prefWidth="200.0" promptText="id" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
           </children>
         </AnchorPane>
       </content>

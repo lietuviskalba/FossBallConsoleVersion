@@ -143,8 +143,7 @@ public class Controller { //implements Initializable {
             chooseForTeamPlayerONE.setItems(list);
             chooseForTeamPlayerTWO.setItems(list);
             //this in create/read tab
-            chooseToUpdateTeamPlayesONE.setItems(list);
-            chooseToUpdateTeamPlayesTWO.setItems(list);
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -209,7 +208,6 @@ public class Controller { //implements Initializable {
                 listString += list.add(s);
             }
             PlayerListInUpdateAndRead.setItems(list);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
