@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import java.lang.String?>
-<?import javafx.collections.*?>
 <?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<Accordion prefHeight="643.0" prefWidth="959.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Controller">
+<Accordion prefHeight="643.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
   <panes>
     <TitledPane animated="false" prefHeight="598.0" prefWidth="885.0" text="Start">
       <content>
@@ -39,7 +34,7 @@
         </AnchorPane>
       </content>
     </TitledPane>
-    <TitledPane fx:id="x5" animated="false" prefHeight="511.0" prefWidth="861.0" text="Create Players and Teams">
+    <TitledPane animated="false" prefHeight="511.0" prefWidth="861.0" text="Create Players and Teams" fx:id="x5">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <children>
@@ -52,7 +47,7 @@
               <children>
                 <Label text="Player Nr. 1" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label text="Player Nr. 2" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <ComboBox id="createPlayerTwo" fx:id="chooseForTeamPlayerTWO" prefWidth="230.0" promptText="Choose Player" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <ComboBox id="createPlayerTwo" fx:id="chooseForTeamPlayerTWO" onMouseClicked="#loadActionTeamPlayers" prefWidth="230.0" promptText="Choose Player" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -61,7 +56,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox id="combo" fx:id="chooseForTeamPlayerONE" prefWidth="230.0" promptText="Choose Player" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <ComboBox id="combo" fx:id="chooseForTeamPlayerONE" onMouseClicked="#loadActionTeamPlayers" prefWidth="230.0" promptText="Choose Player" GridPane.columnIndex="1" GridPane.rowIndex="0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -95,7 +90,6 @@
               </rowConstraints>
             </GridPane>
             <Label font="$x1" layoutX="455.0" layoutY="43.0" prefWidth="154.0" text="Create Team" />
-            <Button layoutX="757.0" layoutY="88.0" mnemonicParsing="false" onAction="#loadActionTeamPlayers" prefWidth="85.0" text="Refresh" />
             <GridPane gridLinesVisible="true" layoutX="7.0" layoutY="80.0" prefHeight="198.0" prefWidth="328.0">
               <children>
                 <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
@@ -121,7 +115,7 @@
         </AnchorPane>
       </content>
     </TitledPane>
-    <TitledPane fx:id="x2" animated="false" text="Read/Update Players and Teams">
+    <TitledPane animated="false" text="Read/Update Players and Teams" fx:id="x2">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <children>
@@ -158,7 +152,7 @@
                 <TextField fx:id="readPlayerONE" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <TextField fx:id="readPlayerTWO" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="readTeamName" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <ComboBox fx:id="chooseToUpdateTeamPlayesONE" prefWidth="296.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <ComboBox fx:id="chooseToUpdateTeamPlayesONE" onMouseClicked="#loadActionTeamPlayers" prefWidth="296.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -167,7 +161,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox fx:id="chooseToUpdateTeamPlayesTWO" prefWidth="296.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <ComboBox fx:id="chooseToUpdateTeamPlayesTWO" onMouseClicked="#loadActionTeamPlayers" prefWidth="296.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -178,8 +172,6 @@
                 </ComboBox>
                 <Label text="Update Nr.1" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <Label text="Update Nr.2" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <Button mnemonicParsing="false" onAction="#loadActionTeamPlayers" prefWidth="85.0" text="Refresh" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                <Button mnemonicParsing="false" onAction="#loadActionTeamPlayers" prefWidth="85.0" text="Refresh" GridPane.columnIndex="2" GridPane.rowIndex="3" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="100.0" />
@@ -232,7 +224,7 @@
             <GridPane layoutX="14.0" layoutY="73.0" prefWidth="357.0">
               <children>
                 <Label prefWidth="127.0" text="Choose a player" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <ComboBox id="combobox" fx:id="PlayerListInUpdateAndRead" prefWidth="153.0" promptText="Player List" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <ComboBox id="combobox" fx:id="PlayerListInUpdateAndRead" onMouseClicked="#loadActionUpdateForPlayers" prefWidth="153.0" promptText="Player List" GridPane.columnIndex="1" GridPane.rowIndex="0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -241,8 +233,6 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <Button mnemonicParsing="false" onAction="#loadActionUpdateForPlayers" prefWidth="85.0" text="Refresh" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                <Button mnemonicParsing="false" onAction="#loadActionUpdateForPlayers" prefWidth="85.0" text="Refresh" GridPane.columnIndex="2" GridPane.rowIndex="0" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="113.0" />
@@ -256,7 +246,7 @@
             <GridPane layoutX="417.0" layoutY="73.0" prefWidth="366.0">
               <children>
                 <Label text="Select team" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <ComboBox id="TeamList" fx:id="TeamListInUpdateAndRead" prefWidth="161.0" promptText="Team List" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <ComboBox id="TeamList" fx:id="TeamListInUpdateAndRead" onMouseClicked="#loadActionUpdateForTeams" prefWidth="161.0" promptText="Team List" GridPane.columnIndex="1" GridPane.rowIndex="0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -265,7 +255,6 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <Button mnemonicParsing="false" onAction="#loadActionUpdateForTeams" prefWidth="85.0" text="Refresh" GridPane.columnIndex="2" GridPane.rowIndex="0" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" prefWidth="82.0" />
@@ -280,7 +269,7 @@
         </AnchorPane>
       </content>
     </TitledPane>
-    <TitledPane fx:id="x3" animated="false" prefHeight="536.0" prefWidth="882.9999000000025" text="Tournament">
+    <TitledPane animated="false" prefHeight="536.0" prefWidth="882.9999000000025" text="Tournament" fx:id="x3">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="509.0" prefWidth="933.0">
           <children>
@@ -298,7 +287,7 @@
                 <Label text="Round 1" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <Label text="Round 2" GridPane.columnIndex="3" GridPane.rowIndex="0" />
                 <Label text="score 2" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-                <ComboBox fx:id="Team1R1" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <ComboBox fx:id="Team1R1" onMouseClicked="#loadActionForTeamsTournaments" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -307,7 +296,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox id="Team1R2" fx:id="Team2R1" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <ComboBox id="Team1R2" fx:id="Team2R1" onMouseClicked="#loadActionForTeamsTournaments" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -316,7 +305,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox id="Team1R3" fx:id="Team3R1" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <ComboBox id="Team1R3" fx:id="Team3R1" onMouseClicked="#loadActionForTeamsTournaments" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -325,7 +314,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox fx:id="Team4R1" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <ComboBox fx:id="Team4R1" onMouseClicked="#loadActionForTeamsTournaments" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -334,7 +323,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox fx:id="Team1R2" prefWidth="123.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                <ComboBox fx:id="Team1R2" onMouseClicked="#loadActionForTeamsTournaments" prefWidth="123.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -343,7 +332,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox fx:id="Team2R2" prefWidth="123.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                <ComboBox fx:id="Team2R2" onMouseClicked="#loadActionForTeamsTournaments" prefWidth="123.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -352,7 +341,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox id="winner" fx:id="winnerTeam" onMouseClicked="#myClickedMethod" prefWidth="122.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                <ComboBox id="winner" fx:id="winnerTeam" onMouseClicked="#loadActionForTeamsTournaments" prefWidth="122.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -383,7 +372,6 @@
             <GridPane layoutX="660.0" layoutY="470.0" prefWidth="199.0">
               <children>
                 <Button id="saveButton" mnemonicParsing="false" onAction="#saveActionForCurrentTournament" prefWidth="99.0" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Button mnemonicParsing="false" onAction="#loadActionForTeamsTournaments" prefWidth="100.0" text="Refresh" GridPane.columnIndex="0" GridPane.rowIndex="0" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -396,7 +384,7 @@
             <GridPane layoutX="6.0" layoutY="461.0" prefWidth="471.0">
               <children>
                 <Button mnemonicParsing="false" onAction="#readActionForALLTheTournamentInformation" prefWidth="99.0" text="Load" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <ComboBox fx:id="pickTournamentDate" prefWidth="199.0" promptText="Tournament date" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <ComboBox fx:id="pickTournamentDate" onMouseClicked="#loadActionForDates" prefWidth="199.0" promptText="Tournament date" GridPane.columnIndex="2" GridPane.rowIndex="0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -405,7 +393,6 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <Button mnemonicParsing="false" onAction="#loadActionForDates" prefWidth="100.0" text="Refresh" GridPane.columnIndex="3" GridPane.rowIndex="0" />
                 <Button mnemonicParsing="false" onAction="#resetActionForTournament" prefWidth="174.5" text="Reset" GridPane.columnIndex="4" GridPane.rowIndex="0" />
                 <TextField id="idInput" fx:id="idTournamentInput" prefWidth="74.0" promptText="id" GridPane.columnIndex="1" GridPane.rowIndex="0" />
               </children>

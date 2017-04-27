@@ -143,7 +143,7 @@ public class Controller { //implements Initializable {
                     + ", Team4R1 = " + "'" + Team4InRound1 + "'"
                     + ", Team1R2 = " + "'" + Team1InRound2 + "'"
                     + ", Team2R2 = " + "'" + Team2InRound2 + "'"
-                    + ", WinnerTeam" + "'" + TeamThatWon   + "'"
+                    + ", WinnerTeam =" + "'" + TeamThatWon   + "'"
                     + ", Score1  = " + "'" + readScore1    + "'"
                     + ", Score2  = " + "'" + readScore2    + "'"
                     + ", Score3  = " + "'" + readScore3    + "'"
@@ -155,11 +155,8 @@ public class Controller { //implements Initializable {
 
             stmt.executeUpdate(sql3);//my bs
 
-            System.out.println(sql);
-            System.out.println(sql1);
-            System.out.println(sql2);
+            System.out.println(sql3);
 
-            System.out.println(sql3);//my bs
 
             con.close();//resultSet.close() statement.close();
         } catch (SQLException e) {
@@ -169,7 +166,7 @@ public class Controller { //implements Initializable {
     }
     //LOAD action for Team players //Create tab
     @FXML
-    public void loadActionTeamPlayers(ActionEvent event) {// this method is USED FOR CREATING A TEAM OUT OF 2 PLAYERS
+    public void loadActionTeamPlayers(MouseEvent mouseEvent) {// this method is USED FOR CREATING A TEAM OUT OF 2 PLAYERS
 
         List<String> members = new ArrayList<String>();
 
@@ -194,6 +191,9 @@ public class Controller { //implements Initializable {
             }
             chooseForTeamPlayerONE.setItems(list);
             chooseForTeamPlayerTWO.setItems(list);
+            chooseToUpdateTeamPlayesONE.setItems(list);
+            chooseToUpdateTeamPlayesTWO.setItems(list);
+            //System.out.println("Veikia");
             //this in create/read tab
 
 
@@ -204,7 +204,7 @@ public class Controller { //implements Initializable {
 
     //LOAD action for Teams //Update&Read tab
     @FXML
-    public void loadActionUpdateForTeams(ActionEvent event) {
+    public void loadActionUpdateForTeams(MouseEvent mouseEvent) {
 
         List<String> members = new ArrayList<String>();
 
@@ -236,7 +236,7 @@ public class Controller { //implements Initializable {
 
     //Load action for Players //Update&Read tab
     @FXML
-    public void loadActionUpdateForPlayers(ActionEvent event) {
+    public void loadActionUpdateForPlayers(MouseEvent mouseEvent) {
 
         List<String> members = new ArrayList<String>();
 
@@ -452,7 +452,7 @@ public class Controller { //implements Initializable {
     }
     //LOAD action for Teams //Tournament tab
     @FXML
-    public void loadActionForTeamsTournaments(ActionEvent actionEvent){
+    public void loadActionForTeamsTournaments(MouseEvent mouseEvent){
 
         List<String> members = new ArrayList<String>();
 
@@ -489,7 +489,7 @@ public class Controller { //implements Initializable {
     }
     //LOAD action for tournament date //Tournament tab
     @FXML
-    public void loadActionForDates(ActionEvent actionEvent){
+    public void loadActionForDates(MouseEvent mouseEvent){
         List<String> members = new ArrayList<String>();
 
         try {
