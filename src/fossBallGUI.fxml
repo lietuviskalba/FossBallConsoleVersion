@@ -352,7 +352,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox id="winner" fx:id="winnerTeam" prefWidth="122.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                <ComboBox id="winner" fx:id="winnerTeam" onMouseClicked="#myClickedMethod" prefWidth="122.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -393,10 +393,10 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane layoutX="14.0" layoutY="470.0" prefWidth="445.0">
+            <GridPane layoutX="6.0" layoutY="461.0" prefWidth="471.0">
               <children>
-                <Button mnemonicParsing="false" onAction="#readActionForALLTheTournamentInformation" prefWidth="91.0" text="Load" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <ComboBox fx:id="pickTournamentDate" prefWidth="199.0" promptText="Tournament date" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Button mnemonicParsing="false" onAction="#readActionForALLTheTournamentInformation" prefWidth="99.0" text="Load" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <ComboBox fx:id="pickTournamentDate" prefWidth="199.0" promptText="Tournament date" GridPane.columnIndex="2" GridPane.rowIndex="0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -405,20 +405,21 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <Button mnemonicParsing="false" onAction="#loadActionForDates" prefWidth="100.0" text="Refresh" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                <Button mnemonicParsing="false" onAction="#resetActionForTournament" prefWidth="174.5" text="Reset" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                <Button mnemonicParsing="false" onAction="#loadActionForDates" prefWidth="100.0" text="Refresh" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                <Button mnemonicParsing="false" onAction="#resetActionForTournament" prefWidth="174.5" text="Reset" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+                <TextField id="idInput" fx:id="idTournamentInput" prefWidth="74.0" promptText="id" GridPane.columnIndex="1" GridPane.rowIndex="0" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="90.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="159.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="94.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="114.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="101.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="64.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="156.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="76.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="74.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <TextField id="idInput" fx:id="idTournamentInput" layoutX="527.0" layoutY="474.0" prefWidth="89.0" promptText="id" />
           </children>
         </AnchorPane>
       </content>

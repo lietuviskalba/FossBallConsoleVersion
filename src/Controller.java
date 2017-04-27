@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.TextFlow;
 import javafx.scene.control.PasswordField;
 
@@ -102,10 +103,13 @@ public class Controller { //implements Initializable {
         String Team1InRound2 = Team1R2.getValue();
         String Team2InRound2 = Team2R2.getValue();
 
+        String TeamThatWon = winnerTeam.getValue();
+
+        //String TournamentDate = pickTournamentDate.getValue()
+
         String readScore1 = inputScore1.getText();
         String readScore2 = inputScore2.getText();
         String readScore3 = inputScore3.getText();
-
 
         String readID = idTournamentInput.getText();
         //mantas bull shiy-------------------------------
@@ -116,11 +120,11 @@ public class Controller { //implements Initializable {
 
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
-
+            // statement.exucuteUpdate ("create table...." //kai nera datos tik readas
             ResultSet rs = stmt.executeQuery("SELECT Member1, Member2 FROM Teams WHERE TeamName ="+ "'"+ laimetojai + "'");
-            while (rs.next()) {
+            while (rs.next()) {//rs.Setnext()
                 winneriai.add(
-                        rs.getString(1));
+                        rs.getString(1));//cia guni ta suda savo inof name, id/.....
                 winneriai.add(
                         rs.getString(2));
                 //urodas pizda wtf reik sito sudo kad veiktu mano pridetas kodas nu nx
@@ -139,12 +143,13 @@ public class Controller { //implements Initializable {
                     + ", Team4R1 = " + "'" + Team4InRound1 + "'"
                     + ", Team1R2 = " + "'" + Team1InRound2 + "'"
                     + ", Team2R2 = " + "'" + Team2InRound2 + "'"
+                    + ", WinnerTeam" + "'" + TeamThatWon   + "'"
                     + ", Score1  = " + "'" + readScore1    + "'"
                     + ", Score2  = " + "'" + readScore2    + "'"
                     + ", Score3  = " + "'" + readScore3    + "'"
-                    +"WHERE Tournaments. TournamentID =" +readID;
+                    + "WHERE Tournaments. TournamentID =" +readID;
 
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate(sql);//va ta exucute update blet
             stmt.executeUpdate(sql1);
             stmt.executeUpdate(sql2);
 
@@ -156,7 +161,7 @@ public class Controller { //implements Initializable {
 
             System.out.println(sql3);//my bs
 
-            con.close();
+            con.close();//resultSet.close() statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -534,9 +539,13 @@ public class Controller { //implements Initializable {
                 Team1R2.setValue(rs.getString(6));
                 Team2R2.setValue(rs.getString(7));
 
+                winnerTeam.setValue(rs.getString(8));
+                pickTournamentDate.setValue(rs.getString(11));
+
                 inputScore1.setText(rs.getString(8));
                 inputScore2.setText(rs.getString(9));
                 inputScore3.setText(rs.getString(10));
+
             }
             con.close();
 
@@ -555,8 +564,15 @@ public class Controller { //implements Initializable {
         Team1R2.setValue("");
         Team2R2.setValue("");
 
+        winnerTeam.setValue("");
+        pickTournamentDate.setValue("");
+
         inputScore1.setText("");
         inputScore2.setText("");
         inputScore3.setText("");
+    }
+
+    public void myClickedMethod(MouseEvent mouseEvent) {
+        System.out.println("yoiu pressed me");
     }
 }
