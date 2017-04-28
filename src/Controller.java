@@ -250,7 +250,7 @@ public class Controller { //implements Initializable {
                         rs.getInt(1) +" "
                               +   rs.getString(2));
             }
-            con.close();
+           con.close();
 
             ObservableList<String> list = FXCollections.observableArrayList();
 
@@ -307,7 +307,7 @@ public class Controller { //implements Initializable {
                 readEmail.setText(rs.getString(4));
                 readRank.setText(rs.getString(5));
             }
-            con.close();
+           con.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -346,7 +346,7 @@ public class Controller { //implements Initializable {
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
             stmt.executeUpdate(sql);
-            con.close();
+           con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -395,7 +395,7 @@ public class Controller { //implements Initializable {
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
             stmt.executeUpdate(sql);
-            con.close();
+           con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -452,7 +452,7 @@ public class Controller { //implements Initializable {
     }
     //LOAD action for Teams //Tournament tab
     @FXML
-    public ObservableList<String> loadActionForTeamsTournaments( ){
+    public void loadActionForTeamsTournaments(ActionEvent actionEvent ){
 
         List<String> members = new ArrayList<String>();
 
@@ -466,7 +466,7 @@ public class Controller { //implements Initializable {
                 members.add(
                         rs.getString(4));
             }
-            con.close();
+           con.close();
 
             ObservableList<String> list = FXCollections.observableArrayList();
 
@@ -475,22 +475,19 @@ public class Controller { //implements Initializable {
             for (String s : members) {
                 listString += list.add(s);
             }
-            //komanda.setItems(list);
-            //Team2R1.setItems(list);
-            //Team3R1.setItems(list);
-            //Team4R1.setItems(list);
-            //Team1R2.setItems(list);
-            //Team2R2.setItems(list);
-            //winnerTeam.setItems(list);
-            return list;
+            Team1R1.setItems(list);
+            Team2R1.setItems(list);
+            Team3R1.setItems(list);
+            Team4R1.setItems(list);
+            Team1R2.setItems(list);
+            Team2R2.setItems(list);
+            winnerTeam.setItems(list);
 
         } catch (SQLException e) {
             e.printStackTrace();
 
         }
-        ObservableList<String> aa = FXCollections.observableArrayList();
-        aa.add("failed to load database");
-        return aa;
+
      }
     //LOAD action for tournament date //Tournament tab
     @FXML
@@ -552,7 +549,7 @@ public class Controller { //implements Initializable {
                 inputScore3.setText(rs.getString(10));
 
             }
-            con.close();
+           con.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -577,29 +574,5 @@ public class Controller { //implements Initializable {
         inputScore3.setText("");
     }
 
-    public void Team1R1loader(MouseEvent mouseEvent) {
-         Team1R1.setItems(loadActionForTeamsTournaments());
-      }
-    public void Team2R1loader(MouseEvent mouseEvent) {
-        Team2R1.setItems(loadActionForTeamsTournaments());
-    }
-    public void Team3Rloader(MouseEvent mouseEvent) {
-        Team3R1.setItems(loadActionForTeamsTournaments());
-    }
-    public void Team4R1oader(MouseEvent mouseEvent) {
 
-        Team4R1.setItems(loadActionForTeamsTournaments());
-    }
-    public void Team1R2loader(MouseEvent mouseEvent) {
-
-        Team1R2.setItems(loadActionForTeamsTournaments());
-    }
-    public void Team2R2loader(MouseEvent mouseEvent) {
-
-        Team2R2.setItems(loadActionForTeamsTournaments());
-    }
-    public void WinnerLoader(MouseEvent mouseEvent) {
-
-        winnerTeam.setItems(loadActionForTeamsTournaments());
-    }
 }

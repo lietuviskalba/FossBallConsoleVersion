@@ -287,7 +287,7 @@
                 <Label text="Round 1" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <Label text="Round 2" GridPane.columnIndex="3" GridPane.rowIndex="0" />
                 <Label text="score 2" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-                <ComboBox fx:id="Team1R1" onMouseClicked="#Team1R1loader" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <ComboBox fx:id="Team1R1" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -296,7 +296,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox id="Team1R2" fx:id="Team2R1" onMouseClicked="#Team2R1loader" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <ComboBox id="Team1R2" fx:id="Team2R1" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -305,7 +305,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox id="Team1R3" fx:id="Team3R1" onMouseClicked="#Team3Rloader" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <ComboBox id="Team1R3" fx:id="Team3R1" prefWidth="123.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -314,7 +314,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox fx:id="Team4R1" onMouseClicked="#Team4R1oader" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <ComboBox fx:id="Team4R1" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -323,7 +323,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox fx:id="Team1R2" onMouseClicked="#Team1R2loader" prefWidth="123.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                <ComboBox fx:id="Team1R2" prefWidth="123.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -332,7 +332,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox fx:id="Team2R2" onMouseClicked="#Team2R2loader" prefWidth="123.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                <ComboBox fx:id="Team2R2" prefWidth="123.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -341,7 +341,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <ComboBox id="winner" fx:id="winnerTeam" onMouseClicked="#WinnerLoader" prefWidth="122.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                <ComboBox id="winner" fx:id="winnerTeam" prefWidth="122.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -372,6 +372,7 @@
             <GridPane layoutX="660.0" layoutY="470.0" prefWidth="199.0">
               <children>
                 <Button id="saveButton" mnemonicParsing="false" onAction="#saveActionForCurrentTournament" prefWidth="99.0" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Button mnemonicParsing="false" onAction="#loadActionForTeamsTournaments" text="Refresh" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
