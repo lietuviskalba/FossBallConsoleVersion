@@ -90,8 +90,6 @@ public class Controller {
     @FXML
     private void saveActionForCurrentTournament(ActionEvent event) {
 
-        List<String> winneriai = new ArrayList<String>();
-        String laimetojai = winnerTeam.getValue();
 
         //Mantas bull shit--------------------------
         String Team1InRound1 = Team1R1.getValue();
@@ -112,36 +110,44 @@ public class Controller {
 
         String readID = idTournamentInput.getText();
         //mantas bull shiy-------------------------------
-        if (laimetojai == "null" || laimetojai == " ") {
+
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+            Statement stmt = con.createStatement();
+            //Mantas Bull Shit
+            String sql3 = "UPDATE  Tournaments SET Team1R1 = " + "'" + Team1InRound1 + "'"
+                    + ", Team2R1 = " + "'" + Team2InRound1 + "'"
+                    + ", Team3R1 = " + "'" + Team3InRound1 + "'"
+                    + ", Team4R1 = " + "'" + Team4InRound1 + "'"
+                    + ", Team1R2 = " + "'" + Team1InRound2 + "'"
+                    + ", Team2R2 = " + "'" + Team2InRound2 + "'"
+                    + ", WinnerTeam =" + "'" + TeamThatWon + "'"
+                    + ", Score1  = " + "'" + readScore1 + "'"
+                    + ", Score2  = " + "'" + readScore2 + "'"
+                    + ", Score3  = " + "'" + readScore3 + "'"
+                    + "WHERE Tournaments. TournamentID =" + readID;
+            System.out.println(sql3);
+
+            stmt.executeUpdate(sql3);//my bs
+
+            con.close();//resultSet.close() statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void GiveScore(ActionEvent event) {
+
+System.out.println("Veikia");
+        List<String> winneriai = new ArrayList<String>();
+        String laimetojai = winnerTeam.getValue();
+
+        if (laimetojai != "null" || laimetojai != " ") {
             System.out.println("faileddd"); //spaghetti
 
-
-            try {
-
-                Connection con = DBConnection.getConnection();
-                Statement stmt = con.createStatement();
-                // statement.exucuteUpdate ("create table...." //kai nera datos tik readas
-                //Mantas Bull Shit
-                String sql3 = "UPDATE  Tournaments SET Team1R1 = " + "'" + Team1InRound1 + "'"
-                        + ", Team2R1 = " + "'" + Team2InRound1 + "'"
-                        + ", Team3R1 = " + "'" + Team3InRound1 + "'"
-                        + ", Team4R1 = " + "'" + Team4InRound1 + "'"
-                        + ", Team1R2 = " + "'" + Team1InRound2 + "'"
-                        + ", Team2R2 = " + "'" + Team2InRound2 + "'"
-                        + ", WinnerTeam =" + "'" + TeamThatWon + "'"
-                        + ", Score1  = " + "'" + readScore1 + "'"
-                        + ", Score2  = " + "'" + readScore2 + "'"
-                        + ", Score3  = " + "'" + readScore3 + "'"
-                        + "WHERE Tournaments. TournamentID =" + readID;
-                System.out.println(sql3);
-
-                stmt.executeUpdate(sql3);//my bs
-
-                con.close();//resultSet.close() statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } else {
             try {
 
                 String sql = "UPDATE Teams SET Score = Score+ 1 WHERE Teams.TeamName = '" + laimetojai + "'";
@@ -164,34 +170,24 @@ public class Controller {
 
                 String sql1 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas1 + "'";
                 String sql2 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas2 + "'";
-                //Mantas Bull Shit
-                String sql3 = "UPDATE  Tournaments SET Team1R1 = " + "'" + Team1InRound1 + "'"
-                        + ", Team2R1 = " + "'" + Team2InRound1 + "'"
-                        + ", Team3R1 = " + "'" + Team3InRound1 + "'"
-                        + ", Team4R1 = " + "'" + Team4InRound1 + "'"
-                        + ", Team1R2 = " + "'" + Team1InRound2 + "'"
-                        + ", Team2R2 = " + "'" + Team2InRound2 + "'"
-                        + ", WinnerTeam =" + "'" + TeamThatWon + "'"
-                        + ", Score1  = " + "'" + readScore1 + "'"
-                        + ", Score2  = " + "'" + readScore2 + "'"
-                        + ", Score3  = " + "'" + readScore3 + "'"
-                        + "WHERE Tournaments. TournamentID =" + readID;
-                System.out.println(sql3);
                 System.out.println(sql);
                 System.out.println(sql1);
                 System.out.println(sql2);
-
                 stmt.executeUpdate(sql);//va ta exucute update blet
                 stmt.executeUpdate(sql1);
                 stmt.executeUpdate(sql2);
-                stmt.executeUpdate(sql3);//my bs
 
                 con.close();//resultSet.close() statement.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        } else {
+
+        System.out.println("Life sucks");
         }
-    }
+
+        }
+
     //LOAD action for Team players //Create tab
     @FXML
     public void loadActionTeamPlayers(MouseEvent mouseEvent) {// this method is USED FOR CREATING A TEAM OUT OF 2 PLAYERS
@@ -574,9 +570,9 @@ public class Controller {
                 winnerTeam.setValue(rs.getString(8));
                 pickTournamentDate.setValue(rs.getString(12));
 
-                inputScore1.setText(rs.getString(8));
-                inputScore2.setText(rs.getString(9));
-                inputScore3.setText(rs.getString(10));
+                inputScore1.setText(rs.getString(9));
+                inputScore2.setText(rs.getString(10));
+                inputScore3.setText(rs.getString(11));
 
             }
            con.close();

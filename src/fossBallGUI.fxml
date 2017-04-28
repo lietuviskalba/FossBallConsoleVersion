@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import java.lang.String?>
-<?import javafx.collections.*?>
 <?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<Accordion prefHeight="643.0" prefWidth="959.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Controller">
+<Accordion prefHeight="643.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
   <panes>
     <TitledPane animated="false" prefHeight="598.0" prefWidth="885.0" text="Start">
       <content>
@@ -39,7 +34,7 @@
         </AnchorPane>
       </content>
     </TitledPane>
-    <TitledPane fx:id="x5" animated="false" prefHeight="511.0" prefWidth="861.0" text="Create Players and Teams">
+    <TitledPane animated="false" prefHeight="511.0" prefWidth="861.0" text="Create Players and Teams" fx:id="x5">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <children>
@@ -120,7 +115,7 @@
         </AnchorPane>
       </content>
     </TitledPane>
-    <TitledPane fx:id="x2" animated="false" text="Read/Update Players and Teams">
+    <TitledPane animated="false" text="Read/Update Players and Teams" fx:id="x2">
       <content>
         <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
           <children>
@@ -272,9 +267,9 @@
         </AnchorPane>
       </content>
     </TitledPane>
-    <TitledPane fx:id="x3" animated="false" prefHeight="536.0" prefWidth="882.9999000000025" text="Tournament">
+    <TitledPane animated="false" prefHeight="536.0" prefWidth="882.9999000000025" text="Tournament" fx:id="x3">
       <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="509.0" prefWidth="933.0">
+        <AnchorPane id="Content" fx:id="GiveScore" minHeight="0.0" minWidth="0.0" prefHeight="509.0" prefWidth="933.0">
           <children>
             <Label font="$x1" layoutX="365.0" layoutY="5.0" prefHeight="37.0" prefWidth="149.0" text="Tournament" />
             <GridPane gridLinesVisible="true" layoutX="0.0" layoutY="54.0" prefHeight="385.0" prefWidth="858.0">
@@ -410,6 +405,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
+                  <Button layoutX="708.0" layoutY="460.0" mnemonicParsing="false" onAction="#GiveScore" text="Prize" />
           </children>
         </AnchorPane>
       </content>
