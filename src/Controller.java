@@ -90,11 +90,11 @@ public class Controller {
     @FXML
     private void saveActionForCurrentTournament(ActionEvent event) {
 
-        List<String> winnersListArray = new ArrayList<String>();
+        List<String> winneriai = new ArrayList<String>();
+        String laimetojai = winnerTeam.getValue();
 
-        String playersThatWon = winnerTeam.getValue();// to asign ranks to players
-
-        String Team1InRound1 = Team1R1.getValue();//get the current value of the combo boxes whatever it is
+        //Mantas bull shit--------------------------
+        String Team1InRound1 = Team1R1.getValue();
         String Team2InRound1 = Team2R1.getValue();
         String Team3InRound1 = Team3R1.getValue();
         String Team4InRound1 = Team4R1.getValue();
@@ -102,70 +102,95 @@ public class Controller {
         String Team1InRound2 = Team1R2.getValue();
         String Team2InRound2 = Team2R2.getValue();
 
-        String TeamThatWon   = winnerTeam.getValue();
+        String TeamThatWon = winnerTeam.getValue();
 
-        String readScore1   = inputScore1.getText();
-        String readScore2   = inputScore2.getText();
-        String readScore3   = inputScore3.getText();
+        //String TournamentDate = pickTournamentDate.getValue()
 
-        String readDate = tournamentDateInput.getText();
+        String readScore1 = inputScore1.getText();
+        String readScore2 = inputScore2.getText();
+        String readScore3 = inputScore3.getText();
 
-        String readID   = idTournamentInput.getText();
+        String readID = idTournamentInput.getText();
+        //mantas bull shiy-------------------------------
+        if (laimetojai == "null" || laimetojai == " ") {
+            System.out.println("faileddd"); //spaghetti
 
-     if (playersThatWon == null || playersThatWon == " ") {//very important if statement to make sure that the null values of the combo boxes don't crash the system
 
-         System.out.println("ERROR MAN SOMETHING WENT TITS UP");
-         playersThatWon = ".";
-     }
-     try {
-         String sql = "UPDATE Teams " +
-                      "SET Score = Score+ 1 " +
-                      "WHERE Teams.TeamName = '" + playersThatWon + "'";
+            try {
 
-         Connection con = DBConnection.getConnection();
-         Statement stmt = con.createStatement();
-         ResultSet rs = stmt.executeQuery("SELECT Member1, Member2 " +
-                                              "FROM Teams " +
-                                              "WHERE TeamName =" + "'" + playersThatWon + "'");
-         while (rs.next()) {
-             winnersListArray.add(
-                     rs.getString(1));
-             winnersListArray.add(
-                     rs.getString(2));
-             winnersListArray.add(
-                     rs.getString(2));
-         }
-         String winnerPlayer1 = winnersListArray.get(0);// winner 1
-         String winnerPlayer2 = winnersListArray.get(1); //winner 2
+                Connection con = DBConnection.getConnection();
+                Statement stmt = con.createStatement();
+                // statement.exucuteUpdate ("create table...." //kai nera datos tik readas
+                //Mantas Bull Shit
+                String sql3 = "UPDATE  Tournaments SET Team1R1 = " + "'" + Team1InRound1 + "'"
+                        + ", Team2R1 = " + "'" + Team2InRound1 + "'"
+                        + ", Team3R1 = " + "'" + Team3InRound1 + "'"
+                        + ", Team4R1 = " + "'" + Team4InRound1 + "'"
+                        + ", Team1R2 = " + "'" + Team1InRound2 + "'"
+                        + ", Team2R2 = " + "'" + Team2InRound2 + "'"
+                        + ", WinnerTeam =" + "'" + TeamThatWon + "'"
+                        + ", Score1  = " + "'" + readScore1 + "'"
+                        + ", Score2  = " + "'" + readScore2 + "'"
+                        + ", Score3  = " + "'" + readScore3 + "'"
+                        + "WHERE Tournaments. TournamentID =" + readID;
+                System.out.println(sql3);
 
-         String sql1 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + winnerPlayer1 + "'";
-         String sql2 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + winnerPlayer2 + "'";
-         //Mantas Bull Shit
-         String sql3 = "UPDATE  Tournaments SET Team1R1 = " + "'" + Team1InRound1 + "'"
-                 + ", Team2R1        = " + "'" + Team2InRound1  + "'"
-                 + ", Team3R1        = " + "'" + Team3InRound1  + "'"
-                 + ", Team4R1        = " + "'" + Team4InRound1  + "'"
-                 + ", Team1R2        = " + "'" + Team1InRound2  + "'"
-                 + ", Team2R2        = " + "'" + Team2InRound2  + "'"
-                 + ", WinnerTeam     = " + "'" + TeamThatWon    + "'"
-                 + ", Score1         = " + "'" + readScore1     + "'"
-                 + ", Score2         = " + "'" + readScore2     + "'"
-                 + ", Score3         = " + "'" + readScore3     + "'"
-                 + ", TournamentDate = " + "'" + readDate       + "'"
-                 + "WHERE Tournaments. TournamentID =" + readID;
+                stmt.executeUpdate(sql3);//my bs
 
-         System.out.println(sql3);
+                con.close();//resultSet.close() statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
 
-         stmt.executeUpdate(sql);//va ta exucute update blet
-         stmt.executeUpdate(sql1);
-         stmt.executeUpdate(sql2);
-         stmt.executeUpdate(sql3);//my bs
+                String sql = "UPDATE Teams SET Score = Score+ 1 WHERE Teams.TeamName = '" + laimetojai + "'";
 
-         con.close();//resultSet.close() statement.close();
-     } catch (SQLException e) {
-         e.printStackTrace();
-     }
+                Connection con = DBConnection.getConnection();
+                Statement stmt = con.createStatement();
+                // statement.exucuteUpdate ("create table...." //kai nera datos tik readas
+                ResultSet rs = stmt.executeQuery("SELECT Member1, Member2 FROM Teams WHERE TeamName =" + "'" + laimetojai + "'");
+                while (rs.next()) {//rs.Setnext()
+                    winneriai.add(
+                            rs.getString(1));//cia guni ta suda savo inof name, id/.....
+                    winneriai.add(
+                            rs.getString(2));
+                    //urodas pizda wtf reik sito sudo kad veiktu mano pridetas kodas nu nx
+                    winneriai.add(
+                            rs.getString(2));
+                }
+                String laimetojas1 = winneriai.get(0);// winner 1
+                String laimetojas2 = winneriai.get(1); //winner 2
 
+                String sql1 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas1 + "'";
+                String sql2 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas2 + "'";
+                //Mantas Bull Shit
+                String sql3 = "UPDATE  Tournaments SET Team1R1 = " + "'" + Team1InRound1 + "'"
+                        + ", Team2R1 = " + "'" + Team2InRound1 + "'"
+                        + ", Team3R1 = " + "'" + Team3InRound1 + "'"
+                        + ", Team4R1 = " + "'" + Team4InRound1 + "'"
+                        + ", Team1R2 = " + "'" + Team1InRound2 + "'"
+                        + ", Team2R2 = " + "'" + Team2InRound2 + "'"
+                        + ", WinnerTeam =" + "'" + TeamThatWon + "'"
+                        + ", Score1  = " + "'" + readScore1 + "'"
+                        + ", Score2  = " + "'" + readScore2 + "'"
+                        + ", Score3  = " + "'" + readScore3 + "'"
+                        + "WHERE Tournaments. TournamentID =" + readID;
+                System.out.println(sql3);
+                System.out.println(sql);
+                System.out.println(sql1);
+                System.out.println(sql2);
+
+                stmt.executeUpdate(sql);//va ta exucute update blet
+                stmt.executeUpdate(sql1);
+                stmt.executeUpdate(sql2);
+                stmt.executeUpdate(sql3);//my bs
+
+                con.close();//resultSet.close() statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
     //LOAD action for Team players //Create tab
     @FXML
