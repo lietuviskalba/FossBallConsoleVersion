@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 
 public class DBConnection {
-    private final static String URL = "jdbc:mysql://54.70.10.89:3306/";
+    private final static String URL = "jdbc:mysql://54.70.10.89:3306/";//54.70.10.89/phpmyadmin is what you type in the URL if you want to connect to the database
     private final static String DB_NAME = "foosball";
     private final static String USER = "hans";
     private final static String PASS = "minecraft64";

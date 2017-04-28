@@ -67,8 +67,7 @@ public class Controller {
     @FXML
     private TextField readRank; //read for players
     @FXML
-    private TextField tournamentDateInput;
-
+    private TextField tournamentDateInput; //create the date for tournament
 
     @FXML
     private TextField readPlayerONE;//read for teams
@@ -84,15 +83,11 @@ public class Controller {
     @FXML
     private TextField inputScore3;//send tournament score to database
 
-
-
-    //SAVE tournament current information about teams and score // Tournament tab
+    //SAVE tournament current information about teams and score // Tournament tab -------------------------------------------------
     @FXML
     private void saveActionForCurrentTournament(ActionEvent event) {
 
-
-        //Mantas bull shit--------------------------
-        String Team1InRound1 = Team1R1.getValue();
+        String Team1InRound1 = Team1R1.getValue();//we are getting the current value from the comboboxes and storing into the string value
         String Team2InRound1 = Team2R1.getValue();
         String Team3InRound1 = Team3R1.getValue();
         String Team4InRound1 = Team4R1.getValue();
@@ -102,93 +97,106 @@ public class Controller {
 
         String TeamThatWon = winnerTeam.getValue();
 
-        //String TournamentDate = pickTournamentDate.getValue()
-
         String readScore1 = inputScore1.getText();
         String readScore2 = inputScore2.getText();
         String readScore3 = inputScore3.getText();
 
-        String readID = idTournamentInput.getText();
-        //mantas bull shiy-------------------------------
+        String tourDate = tournamentDateInput.getText();
 
+        String readID = idTournamentInput.getText();
 
         try {
 
             Connection con = DBConnection.getConnection();
             Statement stmt = con.createStatement();
-            //Mantas Bull Shit
-            String sql3 = "UPDATE  Tournaments SET Team1R1 = " + "'" + Team1InRound1 + "'"
-                    + ", Team2R1 = " + "'" + Team2InRound1 + "'"
-                    + ", Team3R1 = " + "'" + Team3InRound1 + "'"
-                    + ", Team4R1 = " + "'" + Team4InRound1 + "'"
-                    + ", Team1R2 = " + "'" + Team1InRound2 + "'"
-                    + ", Team2R2 = " + "'" + Team2InRound2 + "'"
-                    + ", WinnerTeam =" + "'" + TeamThatWon + "'"
-                    + ", Score1  = " + "'" + readScore1 + "'"
-                    + ", Score2  = " + "'" + readScore2 + "'"
-                    + ", Score3  = " + "'" + readScore3 + "'"
-                    + "WHERE Tournaments. TournamentID =" + readID;
+            //sql commands to update the current values stored in the data base
+            String sql3 =
+                    "UPDATE  Tournaments    " +
+                    "SET Team1R1          = " + "'" + Team1InRound1  + "'"
+                    + ", Team2R1          = " + "'" + Team2InRound1  + "'"
+                    + ", Team3R1          = " + "'" + Team3InRound1  + "'"
+                    + ", Team4R1          = " + "'" + Team4InRound1  + "'"
+                    + ", Team1R2          = " + "'" + Team1InRound2  + "'"
+                    + ", Team2R2          = " + "'" + Team2InRound2  + "'"
+                    + ", WinnerTeam       = " + "'" + TeamThatWon    + "'"
+                    + ", Score1           = " + "'" + readScore1     + "'"
+                    + ", Score2           = " + "'" + readScore2     + "'"
+                    + ", Score3           = " + "'" + readScore3     + "'"
+                    + ", TournamentDate   = " + "'" + tourDate       + "'"
+                    + "WHERE Tournaments. TournamentID ="+ readID;
+
             System.out.println(sql3);
-
-            stmt.executeUpdate(sql3);//my bs
-
+            stmt.executeUpdate(sql3);
             con.close();//resultSet.close() statement.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    //GIVE action it gives score to the players that won //Tournament tab--------------------------------------------------------------------------------
     @FXML
-    private void GiveScore(ActionEvent event) {
+    private void giveScoreToThePlayersThatWon(ActionEvent event) {
 
-System.out.println("Veikia");
-        List<String> winneriai = new ArrayList<String>();
-        String laimetojai = winnerTeam.getValue();
-
-        if (laimetojai != "null" || laimetojai != " ") {
-            System.out.println("faileddd"); //spaghetti
+        List<String> playersThatOne = new ArrayList<String>();
+        String winners = winnerTeam.getValue();
+        //The if makes sure that there is no crash if there is no value in the combo box
+        if (winners != "null" || winners != " ") {
+            System.out.println("<<SORRY BUT SOMETHING WENT TITS UP>>");
 
             try {
 
-                String sql = "UPDATE Teams SET Score = Score+ 1 WHERE Teams.TeamName = '" + laimetojai + "'";
+                String sql =
+                        "UPDATE Teams " +
+                        "SET Score = Score+ 1 " +
+                        "WHERE Teams.TeamName = '" + winners + "'";
 
                 Connection con = DBConnection.getConnection();
                 Statement stmt = con.createStatement();
-                // statement.exucuteUpdate ("create table...." //kai nera datos tik readas
-                ResultSet rs = stmt.executeQuery("SELECT Member1, Member2 FROM Teams WHERE TeamName =" + "'" + laimetojai + "'");
+                ResultSet rs = stmt.executeQuery(
+                            "SELECT Member1, Member2 " +
+                                "FROM Teams " +
+                                "WHERE TeamName =" + "'" + winners + "'");
+
                 while (rs.next()) {//rs.Setnext()
-                    winneriai.add(
-                            rs.getString(1));//cia guni ta suda savo inof name, id/.....
-                    winneriai.add(
+                    playersThatOne.add(
+                            rs.getString(1));//This is were you get the info from data base (name, id, age...)
+                    playersThatOne.add(
                             rs.getString(2));
-                    //urodas pizda wtf reik sito sudo kad veiktu mano pridetas kodas nu nx
-                    winneriai.add(
+                    playersThatOne.add(
                             rs.getString(2));
                 }
-                String laimetojas1 = winneriai.get(0);// winner 1
-                String laimetojas2 = winneriai.get(1); //winner 2
+                String playerWhoManagedToWin1 = playersThatOne.get(0);// winner 1
+                String playerWhoManagedToWin2 = playersThatOne.get(1); //winner 2
 
-                String sql1 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas1 + "'";
-                String sql2 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas2 + "'";
+                String sql1 =
+                        "UPDATE `Players` " +
+                        "SET    `PlayerScore` = `PlayerScore` + 1 " +
+                        "WHERE  `Players`.`name` = '" + playerWhoManagedToWin1 + "'";
+
+                String sql2 =
+                        "UPDATE `Players` " +
+                        "SET    `PlayerScore` = `PlayerScore` + 1 " +
+                        "WHERE  `Players`.`name` = '" + playerWhoManagedToWin2 + "'";
+
                 System.out.println(sql);
                 System.out.println(sql1);
                 System.out.println(sql2);
-                stmt.executeUpdate(sql);//va ta exucute update blet
+
+                stmt.executeUpdate(sql);
                 stmt.executeUpdate(sql1);
                 stmt.executeUpdate(sql2);
 
-                con.close();//resultSet.close() statement.close();
+                con.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
 
-        System.out.println("Life sucks");
+        System.out.println("<<THERE HAS TO BE VALUE IN THE WINNER COMBOBOX>>");
+        }
         }
 
-        }
-
-    //LOAD action for Team players //Create tab
+    //LOAD action for Team players //Create tab--------------------------------------------------------------------------------
     @FXML
     public void loadActionTeamPlayers(MouseEvent mouseEvent) {// this method is USED FOR CREATING A TEAM OUT OF 2 PLAYERS
 
@@ -196,7 +204,6 @@ System.out.println("Veikia");
 
         try {
             Connection con = DBConnection.getConnection(); //load players to comboBox
-
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Players");
 
@@ -223,7 +230,7 @@ System.out.println("Veikia");
         }
     }
 
-    //LOAD action for Teams //Update&Read tab
+    //LOAD action for Teams //Update&Read tab--------------------------------------------------------------------------------
     @FXML
     public void loadActionUpdateForTeams(MouseEvent mouseEvent) {
 
@@ -255,7 +262,7 @@ System.out.println("Veikia");
         }
     }
 
-    //Load action for Players //Update&Read tab
+    //Load action for Players //Update&Read tab--------------------------------------------------------------------------------
     @FXML
     public void loadActionUpdateForPlayers(MouseEvent mouseEvent) {
 
@@ -265,7 +272,9 @@ System.out.println("Veikia");
             Connection con = DBConnection.getConnection(); //load players to comboBox
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Players");
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT * " +
+                        "FROM Players");
             while (rs.next()) {
                 members.add(
                         rs.getInt(1) +" "
@@ -285,7 +294,7 @@ System.out.println("Veikia");
             e.printStackTrace();
         }
     }
-    //READ action for Team information //Update&Read tab
+    //READ action for Team information //Update&Read tab--------------------------------------------------------------------------------
     @FXML
     public void readActionForTeams(ActionEvent event){
 
@@ -296,7 +305,10 @@ System.out.println("Veikia");
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Teams WHERE TeamID = " + readID);
+            ResultSet rs = stmt.executeQuery(
+                        "SELECT * " +
+                            "FROM Teams " +
+                            "WHERE TeamID = " + readID);
             while (rs.next()) {
 
                 readPlayerONE.setText(rs.getString(2));
@@ -309,7 +321,7 @@ System.out.println("Veikia");
             e.printStackTrace();
         }
     }
-    //READ action for Player information //Update&Read tab
+    //READ action for Player information //Update&Read tab--------------------------------------------------------------------------------
     @FXML
     public void readActionForPlayers(ActionEvent event){
 
@@ -319,8 +331,10 @@ System.out.println("Veikia");
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Players WHERE ID = " + readID);
-
+            ResultSet rs = stmt.executeQuery(
+                        "SELECT * " +
+                            "FROM Players " +
+                            "WHERE ID = " + readID);
             while (rs.next()) {
 
                 readName.setText(rs.getString(2));
@@ -334,14 +348,15 @@ System.out.println("Veikia");
             e.printStackTrace();
         }
     }
-    //DELETE action for Players //Update&Read tab
+    //DELETE action for Players //Update&Read tab--------------------------------------------------------------------------------
     @FXML
     public void deleteActionForPlayers(ActionEvent actionEvent){
 
         String deleteID = idInput.getText();
 
         try {
-            String sql = "DELETE FROM `Players` WHERE `ID` = " + deleteID+ ";";
+            String sql = "DELETE FROM `Players` " +
+                         "WHERE `ID` = " + deleteID+ ";";
 
             System.out.println(sql);
 
@@ -353,14 +368,15 @@ System.out.println("Veikia");
             e.printStackTrace();
         }
     }
-    //DELETE action for Teams //Update&Read tab
+    //DELETE action for Teams //Update&Read tab--------------------------------------------------------------------------------
     @FXML
     public void deleteActionForTeams(ActionEvent actionEvent){
 
         String deleteID = idTeamInput.getText();
 
         try {
-            String sql = "DELETE FROM `Teams` WHERE `TeamID` = " + deleteID+ ";";
+            String sql = "DELETE FROM `Teams` " +
+                         "WHERE `TeamID` = " + deleteID+ ";";
 
             System.out.println(sql);
 
@@ -372,7 +388,7 @@ System.out.println("Veikia");
             e.printStackTrace();
         }
     }
-    //UPDATE action for players //Update&Read tab
+    //UPDATE action for players //Update&Read tab--------------------------------------------------------------------------------
     @FXML
     public void updateActionForPlayers(ActionEvent actionEvent){
       String id = idInput.getText();
@@ -381,10 +397,11 @@ System.out.println("Veikia");
       String email = readEmail.getText();
 
         try {
-            String sql =  "UPDATE Players SET name = "+ "'" +name+"'"
-                    + ", birth = + " + "'"+ birth + "'"
-                    + ", email ="  + " '" + email+"'"
-                    + "WHERE Players. ID =" + id;
+            String sql =  "UPDATE Players " +
+                          "SET name =     "+ "'" + name  + "'" +
+                            ", birth = + " + "'" + birth + "'" +
+                            ", email ="    + "'"  + email + "'" +
+                          "WHERE Players. ID =" + id;
 
             System.out.println(sql);
 
@@ -396,7 +413,7 @@ System.out.println("Veikia");
             e.printStackTrace();
         }
     }
-    //UPDATE action for Teams //Update&Read tab
+    //UPDATE action for Teams //Update&Read tab--------------------------------------------------------------------------------
     @FXML
     public void updateActionForTeams(ActionEvent actionEvent){
         String idTeam = idTeamInput.getText();
@@ -405,11 +422,11 @@ System.out.println("Veikia");
         String teamName = readTeamName.getText();
 
         try {
-            String sql =  "UPDATE Teams SET Member1 = "+ "'" +player1+"'"
-                    + ", Member2 =  +" + "'"+ player2 + "'"
-                    + ", TeamName ="  + " '" + teamName+"'"
-                    + "WHERE Teams. TeamID =" + idTeam;
-
+            String sql =  "UPDATE Teams  "  +
+                          "SET Member1 = " + "'" + player1 + "'" +
+                          ", Member2 =  +" + "'" + player2 + "'" +
+                          ", TeamName ="   + "'" + teamName+ "'" +
+                          "WHERE Teams. TeamID =" + idTeam;
 
             System.out.println(sql);
 
@@ -421,20 +438,21 @@ System.out.println("Veikia");
             e.printStackTrace();
         }
     }
-    //CREATE action for Team //Create tab
+    //CREATE action for Team //Create tab--------------------------------------------------------------------------------
     @FXML
     public void createActionForTeams(ActionEvent actionEvent){
 
-        String teamname = createTeamName.getText() ;
+        String teamName = createTeamName.getText() ;
         String player1Name =chooseForTeamPlayerONE.getValue(); //member1
         String player2Name =chooseForTeamPlayerTWO.getValue(); //member2
 
-        System.out.println("Name ->" + teamname + "<-");
+        System.out.println("Name ->" + teamName + "<-");
 
 
         try {
-            String sql = "INSERT INTO Teams VALUES " +
-                    "(NULL, " +"'"+ player1Name +"'"+ ", " + "'"     + player2Name+  "' "  +  " ," +   "'"     +teamname+  "'     "+"," +" "+ 0 + ");";
+            String sql = "INSERT INTO Teams " +
+                         "VALUES " +
+                         "(NULL, " +"'"+ player1Name +"'"+ ", " + "'"     + player2Name+  "' "  +  " ," +   "'"     +teamName+  "'     "+"," +" "+ 0 + ");";
 
             System.out.println(sql);
 
@@ -447,7 +465,7 @@ System.out.println("Veikia");
         }
 
     }
-    //CREATE action for Players //Create tab
+    //CREATE action for Players //Create tab--------------------------------------------------------------------------------
     @FXML
     public void createActionForPlayers(ActionEvent actionEvent) {
 
@@ -458,8 +476,9 @@ System.out.println("Veikia");
         System.out.println("Name ->" + name + "<-");
 
         try {
-            String sql = "INSERT INTO Players VALUES " +
-                    "(NULL, " +"'"+ name +"'"+ ", " + birth+"," +   "'"     +email+  "'     "+"," +" "+ 0 + ");";
+            String sql = "INSERT INTO Players " +
+                         "VALUES " +
+                         "(NULL, " +"'"+ name +"'"+ ", " + birth+"," +   "'"     +email+  "'     "+"," +" "+ 0 + ");";
 
             System.out.println(sql);
 
@@ -471,7 +490,7 @@ System.out.println("Veikia");
             e.printStackTrace();
         }
     }
-    //LOAD action for Teams //Tournament tab
+    //LOAD action for Teams //Tournament tab--------------------------------------------------------------------------------
     @FXML
     public void loadActionForTeamsTournaments(ActionEvent actionEvent ){
 
@@ -481,7 +500,8 @@ System.out.println("Veikia");
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Teams");
+            ResultSet rs = stmt.executeQuery("SELECT * " +
+                                                 "FROM Teams");
 
             while (rs.next()) {
                 members.add(
@@ -513,9 +533,8 @@ System.out.println("Veikia");
             e.printStackTrace();
 
         }
-
-     }
-    //LOAD action for tournament date //Tournament tab
+    }
+    //LOAD action for tournament date //Tournament tab--------------------------------------------------------------------------------
     @FXML
     public void loadActionForDates(MouseEvent mouseEvent){
         List<String> members = new ArrayList<String>();
@@ -524,7 +543,8 @@ System.out.println("Veikia");
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Tournaments");
+            ResultSet rs = stmt.executeQuery("SELECT * " +
+                                                 "FROM Tournaments");
 
             while (rs.next()) {
                 members.add(
@@ -545,7 +565,7 @@ System.out.println("Veikia");
             e.printStackTrace();
         }
     }
-    //READ action for ALL the tournament teams //Tournament tab
+    //READ action for ALL the tournament teams //Tournament tab--------------------------------------------------------------------------------
     @FXML
     public void readActionForALLTheTournamentInformation(ActionEvent actionEvent){
         String readID = idTournamentInput.getText();
@@ -554,8 +574,9 @@ System.out.println("Veikia");
             Connection con = DBConnection.getConnection();
 
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Tournaments WHERE TournamentID = " + readID);
-
+            ResultSet rs = stmt.executeQuery("SELECT * " +
+                                                 "FROM Tournaments " +
+                                                 "WHERE TournamentID = " + readID);
 
             while (rs.next()) {
 
@@ -573,7 +594,6 @@ System.out.println("Veikia");
                 inputScore1.setText(rs.getString(9));
                 inputScore2.setText(rs.getString(10));
                 inputScore3.setText(rs.getString(11));
-
             }
            con.close();
 
@@ -581,9 +601,10 @@ System.out.println("Veikia");
             e.printStackTrace();
         }
     }
-    //RESET action reset the tournament information to 0's and blanks // Tournament tab
+    //RESET action reset the tournament information to 0's and blanks // Tournament tab--------------------------------------------------------------------------------
     @FXML
     public  void resetActionForTournament(ActionEvent actionEvent){
+        //This is where we are setting all the values to noting because we are sorta preparing for a new tournament
         Team1R1.setValue(" ");
         Team2R1.setValue(" ");
         Team3R1.setValue(" ");
@@ -593,13 +614,16 @@ System.out.println("Veikia");
         Team2R2.setValue(" ");
 
         winnerTeam.setValue(" ");
-        pickTournamentDate.setValue(" ");
+        pickTournamentDate.setValue("Tournament Date");
 
-        inputScore1.setText(" ");
-        inputScore2.setText(" ");
-        inputScore3.setText(" ");
-        tournamentDateInput.setText(" ");
+        inputScore1.setPromptText(" score");
+        inputScore2.setPromptText(" score");
+        inputScore3.setPromptText(" score");
+
+        tournamentDateInput.setPromptText(" YYYY MM DD");
     }
-
-
+    @FXML
+    public  void shutDown(){
+        System.exit(0);
+    }
 }
