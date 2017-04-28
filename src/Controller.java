@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
-public class Controller { //implements Initializable {
+public class Controller {
 
     //All of these are assigned for combo boxes
     @FXML
@@ -37,6 +37,7 @@ public class Controller { //implements Initializable {
     private ComboBox<String> chooseToUpdateTeamPlayesTWO;
     @FXML
     private ComboBox<String> pickTournamentDate;
+
     //Tournament comboBoxes for all the teams and rounds
     @FXML
     private ComboBox<String> Team1R1;//Round 1
@@ -56,22 +57,25 @@ public class Controller { //implements Initializable {
     @FXML
     private TextField createTeamName;
     @FXML
-    private TextField nameInput, birthInput, emailInput, idInput, idTeamInput, idTournamentInput;//create for players
+    private TextField nameInput, birthInput, emailInput, idInput, idTeamInput, idTournamentInput ;//create for players
     @FXML
-    private TextField readName;//read for players
+    private TextField readName; //read for players
     @FXML
     private TextField readbirth;//read for players
     @FXML
     private TextField readEmail;//read for players
     @FXML
-    private TextField readRank;//read for players
+    private TextField readRank; //read for players
+    @FXML
+    private TextField tournamentDateInput;
+
 
     @FXML
     private TextField readPlayerONE;//read for teams
     @FXML
     private TextField readPlayerTWO;//read for teams
     @FXML
-    private TextField readTeamName;//read for teams
+    private TextField readTeamName; //read for teams
 
     @FXML
     private TextField inputScore1;//send tournament score to database
@@ -86,18 +90,11 @@ public class Controller { //implements Initializable {
     @FXML
     private void saveActionForCurrentTournament(ActionEvent event) {
 
-        //if(saveButton.getText().equals("Save")){
-        //    saveButton.setText("SAVED!!!");
-       // }else{
-        //    saveButton.setText("Save");
-       // }
-        List<String> winneriai = new ArrayList<String>();
+        List<String> winnersListArray = new ArrayList<String>();
 
+        String playersThatWon = winnerTeam.getValue();// to asign ranks to players
 
-        String laimetojai = winnerTeam.getValue();
-
-        //Mantas bull shit--------------------------
-        String Team1InRound1 = Team1R1.getValue();
+        String Team1InRound1 = Team1R1.getValue();//get the current value of the combo boxes whatever it is
         String Team2InRound1 = Team2R1.getValue();
         String Team3InRound1 = Team3R1.getValue();
         String Team4InRound1 = Team4R1.getValue();
@@ -105,55 +102,58 @@ public class Controller { //implements Initializable {
         String Team1InRound2 = Team1R2.getValue();
         String Team2InRound2 = Team2R2.getValue();
 
-        String TeamThatWon = winnerTeam.getValue();
+        String TeamThatWon   = winnerTeam.getValue();
 
-        //String TournamentDate = pickTournamentDate.getValue()
+        String readScore1   = inputScore1.getText();
+        String readScore2   = inputScore2.getText();
+        String readScore3   = inputScore3.getText();
 
-        String readScore1 = inputScore1.getText();
-        String readScore2 = inputScore2.getText();
-        String readScore3 = inputScore3.getText();
+        String readDate = tournamentDateInput.getText();
 
-        String readID = idTournamentInput.getText();
-        //mantas bull shiy-------------------------------
- if (laimetojai == null || laimetojai == " ") {
-     System.out.println("faileddd"); //spaghetti
-     laimetojai = ".";
+        String readID   = idTournamentInput.getText();
 
- }
+     if (playersThatWon == null || playersThatWon == " ") {//very important if statement to make sure that the null values of the combo boxes don't crash the system
+
+         System.out.println("ERROR MAN SOMETHING WENT TITS UP");
+         playersThatWon = ".";
+     }
      try {
-
-         String sql = "UPDATE Teams SET Score = Score+ 1 WHERE Teams.TeamName = '" + laimetojai + "'";
+         String sql = "UPDATE Teams " +
+                      "SET Score = Score+ 1 " +
+                      "WHERE Teams.TeamName = '" + playersThatWon + "'";
 
          Connection con = DBConnection.getConnection();
          Statement stmt = con.createStatement();
-         // statement.exucuteUpdate ("create table...." //kai nera datos tik readas
-         ResultSet rs = stmt.executeQuery("SELECT Member1, Member2 FROM Teams WHERE TeamName =" + "'" + laimetojai + "'");
-         while (rs.next()) {//rs.Setnext()
-             winneriai.add(
-                     rs.getString(1));//cia guni ta suda savo inof name, id/.....
-             winneriai.add(
+         ResultSet rs = stmt.executeQuery("SELECT Member1, Member2 " +
+                                              "FROM Teams " +
+                                              "WHERE TeamName =" + "'" + playersThatWon + "'");
+         while (rs.next()) {
+             winnersListArray.add(
+                     rs.getString(1));
+             winnersListArray.add(
                      rs.getString(2));
-             //urodas pizda wtf reik sito sudo kad veiktu mano pridetas kodas nu nx
-             winneriai.add(
+             winnersListArray.add(
                      rs.getString(2));
          }
-         String laimetojas1 = winneriai.get(0);// winner 1
-         String laimetojas2 = winneriai.get(1); //winner 2
+         String winnerPlayer1 = winnersListArray.get(0);// winner 1
+         String winnerPlayer2 = winnersListArray.get(1); //winner 2
 
-         String sql1 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas1 + "'";
-         String sql2 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas2 + "'";
+         String sql1 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + winnerPlayer1 + "'";
+         String sql2 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + winnerPlayer2 + "'";
          //Mantas Bull Shit
          String sql3 = "UPDATE  Tournaments SET Team1R1 = " + "'" + Team1InRound1 + "'"
-                 + ", Team2R1 = " + "'" + Team2InRound1 + "'"
-                 + ", Team3R1 = " + "'" + Team3InRound1 + "'"
-                 + ", Team4R1 = " + "'" + Team4InRound1 + "'"
-                 + ", Team1R2 = " + "'" + Team1InRound2 + "'"
-                 + ", Team2R2 = " + "'" + Team2InRound2 + "'"
-                 + ", WinnerTeam =" + "'" + TeamThatWon + "'"
-                 + ", Score1  = " + "'" + readScore1 + "'"
-                 + ", Score2  = " + "'" + readScore2 + "'"
-                 + ", Score3  = " + "'" + readScore3 + "'"
+                 + ", Team2R1        = " + "'" + Team2InRound1  + "'"
+                 + ", Team3R1        = " + "'" + Team3InRound1  + "'"
+                 + ", Team4R1        = " + "'" + Team4InRound1  + "'"
+                 + ", Team1R2        = " + "'" + Team1InRound2  + "'"
+                 + ", Team2R2        = " + "'" + Team2InRound2  + "'"
+                 + ", WinnerTeam     = " + "'" + TeamThatWon    + "'"
+                 + ", Score1         = " + "'" + readScore1     + "'"
+                 + ", Score2         = " + "'" + readScore2     + "'"
+                 + ", Score3         = " + "'" + readScore3     + "'"
+                 + ", TournamentDate = " + "'" + readDate       + "'"
                  + "WHERE Tournaments. TournamentID =" + readID;
+
          System.out.println(sql3);
 
          stmt.executeUpdate(sql);//va ta exucute update blet
@@ -196,9 +196,6 @@ public class Controller { //implements Initializable {
             chooseForTeamPlayerTWO.setItems(list);
             chooseToUpdateTeamPlayesONE.setItems(list);
             chooseToUpdateTeamPlayesTWO.setItems(list);
-            //System.out.println("Veikia");
-            //this in create/read tab
-
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -482,9 +479,14 @@ public class Controller { //implements Initializable {
             Team2R1.setItems(list);
             Team3R1.setItems(list);
             Team4R1.setItems(list);
+
             Team1R2.setItems(list);
             Team2R2.setItems(list);
+
             winnerTeam.setItems(list);
+           // pickTournamentDate.setItems(list);
+
+            //inputScore3.setItems(list);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -545,7 +547,7 @@ public class Controller { //implements Initializable {
                 Team2R2.setValue(rs.getString(7));
 
                 winnerTeam.setValue(rs.getString(8));
-                pickTournamentDate.setValue(rs.getString(11));
+                pickTournamentDate.setValue(rs.getString(12));
 
                 inputScore1.setText(rs.getString(8));
                 inputScore2.setText(rs.getString(9));
@@ -575,6 +577,7 @@ public class Controller { //implements Initializable {
         inputScore1.setText(" ");
         inputScore2.setText(" ");
         inputScore3.setText(" ");
+        tournamentDateInput.setText(" ");
     }
 
 
