@@ -92,6 +92,8 @@ public class Controller { //implements Initializable {
         //    saveButton.setText("Save");
        // }
         List<String> winneriai = new ArrayList<String>();
+
+
         String laimetojai = winnerTeam.getValue();
 
         //Mantas bull shit--------------------------
@@ -113,55 +115,56 @@ public class Controller { //implements Initializable {
 
         String readID = idTournamentInput.getText();
         //mantas bull shiy-------------------------------
+ if (laimetojai == null || laimetojai == " ") {
+     System.out.println("faileddd");
+     laimetojai = ".";
 
-        try {
+ }
+     try {
 
-            String sql =  "UPDATE Teams SET Score = Score+ 1 WHERE Teams.TeamName = '" + laimetojai + "'";
+         String sql = "UPDATE Teams SET Score = Score+ 1 WHERE Teams.TeamName = '" + laimetojai + "'";
 
-            Connection con = DBConnection.getConnection();
-            Statement stmt = con.createStatement();
-            // statement.exucuteUpdate ("create table...." //kai nera datos tik readas
-            ResultSet rs = stmt.executeQuery("SELECT Member1, Member2 FROM Teams WHERE TeamName ="+ "'"+ laimetojai + "'");
-            while (rs.next()) {//rs.Setnext()
-                winneriai.add(
-                        rs.getString(1));//cia guni ta suda savo inof name, id/.....
-                winneriai.add(
-                        rs.getString(2));
-                //urodas pizda wtf reik sito sudo kad veiktu mano pridetas kodas nu nx
-                winneriai.add(
-                        rs.getString(2));
-            }
-            String laimetojas1 = winneriai.get(0);// winner 1
-            String laimetojas2 = winneriai.get(1); //winner 2
+         Connection con = DBConnection.getConnection();
+         Statement stmt = con.createStatement();
+         // statement.exucuteUpdate ("create table...." //kai nera datos tik readas
+         ResultSet rs = stmt.executeQuery("SELECT Member1, Member2 FROM Teams WHERE TeamName =" + "'" + laimetojai + "'");
+         while (rs.next()) {//rs.Setnext()
+             winneriai.add(
+                     rs.getString(1));//cia guni ta suda savo inof name, id/.....
+             winneriai.add(
+                     rs.getString(2));
+             //urodas pizda wtf reik sito sudo kad veiktu mano pridetas kodas nu nx
+             winneriai.add(
+                     rs.getString(2));
+         }
+         String laimetojas1 = winneriai.get(0);// winner 1
+         String laimetojas2 = winneriai.get(1); //winner 2
 
-            String sql1 =  "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas1 +"'";
-            String sql2 =  "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas2 +"'";
-            //Mantas Bull Shit
-            String sql3 =  "UPDATE  Tournaments SET Team1R1 = " + "'" + Team1InRound1 + "'"
-                    + ", Team2R1 = " + "'" + Team2InRound1 + "'"
-                    + ", Team3R1 = " + "'" + Team3InRound1 + "'"
-                    + ", Team4R1 = " + "'" + Team4InRound1 + "'"
-                    + ", Team1R2 = " + "'" + Team1InRound2 + "'"
-                    + ", Team2R2 = " + "'" + Team2InRound2 + "'"
-                    + ", WinnerTeam =" + "'" + TeamThatWon   + "'"
-                    + ", Score1  = " + "'" + readScore1    + "'"
-                    + ", Score2  = " + "'" + readScore2    + "'"
-                    + ", Score3  = " + "'" + readScore3    + "'"
-                    + "WHERE Tournaments. TournamentID =" +readID;
+         String sql1 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas1 + "'";
+         String sql2 = "UPDATE `Players` SET `PlayerScore` = `PlayerScore` + 1 WHERE `Players`.`name` = '" + laimetojas2 + "'";
+         //Mantas Bull Shit
+         String sql3 = "UPDATE  Tournaments SET Team1R1 = " + "'" + Team1InRound1 + "'"
+                 + ", Team2R1 = " + "'" + Team2InRound1 + "'"
+                 + ", Team3R1 = " + "'" + Team3InRound1 + "'"
+                 + ", Team4R1 = " + "'" + Team4InRound1 + "'"
+                 + ", Team1R2 = " + "'" + Team1InRound2 + "'"
+                 + ", Team2R2 = " + "'" + Team2InRound2 + "'"
+                 + ", WinnerTeam =" + "'" + TeamThatWon + "'"
+                 + ", Score1  = " + "'" + readScore1 + "'"
+                 + ", Score2  = " + "'" + readScore2 + "'"
+                 + ", Score3  = " + "'" + readScore3 + "'"
+                 + "WHERE Tournaments. TournamentID =" + readID;
+         System.out.println(sql3);
 
-            stmt.executeUpdate(sql);//va ta exucute update blet
-            stmt.executeUpdate(sql1);
-            stmt.executeUpdate(sql2);
+         stmt.executeUpdate(sql);//va ta exucute update blet
+         stmt.executeUpdate(sql1);
+         stmt.executeUpdate(sql2);
+         stmt.executeUpdate(sql3);//my bs
 
-            stmt.executeUpdate(sql3);//my bs
-
-            System.out.println(sql3);
-
-
-            con.close();//resultSet.close() statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+         con.close();//resultSet.close() statement.close();
+     } catch (SQLException e) {
+         e.printStackTrace();
+     }
 
     }
     //LOAD action for Team players //Create tab
@@ -558,20 +561,20 @@ public class Controller { //implements Initializable {
     //RESET action reset the tournament information to 0's and blanks // Tournament tab
     @FXML
     public  void resetActionForTournament(ActionEvent actionEvent){
-        Team1R1.setValue("");
-        Team2R1.setValue("");
-        Team3R1.setValue("");
-        Team4R1.setValue("");
+        Team1R1.setValue(" ");
+        Team2R1.setValue(" ");
+        Team3R1.setValue(" ");
+        Team4R1.setValue(" ");
 
-        Team1R2.setValue("");
-        Team2R2.setValue("");
+        Team1R2.setValue(" ");
+        Team2R2.setValue(" ");
 
-        winnerTeam.setValue("");
-        pickTournamentDate.setValue("");
+        winnerTeam.setValue(" ");
+        pickTournamentDate.setValue(" ");
 
-        inputScore1.setText("");
-        inputScore2.setText("");
-        inputScore3.setText("");
+        inputScore1.setText(" ");
+        inputScore2.setText(" ");
+        inputScore3.setText(" ");
     }
 
 
