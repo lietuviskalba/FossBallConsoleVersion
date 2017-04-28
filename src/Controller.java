@@ -116,7 +116,7 @@ public class Controller { //implements Initializable {
         String readID = idTournamentInput.getText();
         //mantas bull shiy-------------------------------
  if (laimetojai == null || laimetojai == " ") {
-     System.out.println("faileddd");
+     System.out.println("faileddd"); //spaghetti
      laimetojai = ".";
 
  }
